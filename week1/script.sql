@@ -170,9 +170,106 @@ WHERE id > 5;
 DELETE FROM persons ;
 TRUNCATE TABLE persons;
 
--- select
-SELECT * FROM persons;
-SELECT * FROM customers c ;
+-- Comparision operators
+
+-- operators
+-- Retrieve all customers from Germany
+SELECT * 
+FROM customers c 
+WHERE c.country = 'Germany';
+
+-- Retrieve all customers who are not from Germany
+SELECT *
+FROM customers c 
+WHERE c.country <> 'Germany'; -- !=
+
+-- Retrieve all customers with a score greater than 500
+SELECT *
+FROM customers c 
+WHERE c.score  > 500;
+
+-- Retrieve all customers with a score of 500 or more
+SELECT * 
+FROM customers c 
+WHERE c.score >= 500;
+
+-- Retrieve all customers with a score less than 500
+SELECT *
+FROM customers c 
+WHERE c.score < 500;
+
+-- Retrieve all customers with a score of 500 or less
+SELECT * 
+FROM customers c 
+WHERE c.score <= 500;
+
+-- LOGICAL Operators
+
+--Retrieve all customers who are from the USA AND have a score greater than 500
+SELECT *
+FROM customers c 
+WHERE c.country = 'USA' AND c.score > 500;
+
+-- Retrieve all customers who are either from the USA OR have a score greater than 500
+SELECT *
+FROM customers c 
+where c.country = 'USA' OR c.score > 500;
+
+ -- Retrieve all customers with a score NOT less than 500
+SELECT *
+FROM customers c 
+WHERE NOT score < 500;
+
+-- RANGE OPERATORS
+-- Retrieve all customers whose score falls in the range between 100 and 500
+SELECT * 
+FROM customers c 
+WHERE c.score BETWEEN 100 AND 500;
+
+SELECT *
+FROM customers c 
+WHERE c.score <= 500 AND c.score >= 100; -- using comparision operator instead of between
+
+-- MEMBERSHIP Operator (IN, NOT IN)
+
+-- Retrieve all customers from either Germany OR USA
+SELECT *
+FROM customers c 
+WHERE c.country IN ('Germany', 'USA');
+
+-- we can slove using logical and comparision operator
+SELECT *
+FROM customers c 
+WHERE c.country = 'Germany' OR c.country = 'USA';
+
+SELECT * 
+FROM customers c 
+WHERE c.country NOT IN ('Germany', 'USA');
+
+-- SEARCH Operators (LIKE)
+SELECT *
+FROM customers c 
+WHERE c.first_name LIKE 'M%';
+
+SELECT *
+FROM customers c 
+WHERE c.first_name LIKE '%n';
+
+-- find all customers whose first name contains 'r'
+SELECT *
+FROM customers c 
+WHERE c.first_name LIKE  '%r%';
+
+-- find all customers whose first name has 'r' in the third position
+SELECT *
+FROM customers c 
+WHERE c.first_name LIKE '__r%';
+
+
+
+
+
+
 
 
 

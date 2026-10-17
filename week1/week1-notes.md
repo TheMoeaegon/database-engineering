@@ -23,7 +23,7 @@ A database is like a container — it is a kind of organized collection of data.
 ## Database Structure
 - We have a **server**, and in the server we can have multiple **databases**. Inside a database we have **schemas** (logical containers used to organize the tables in the database), and inside a schema we have multiple **tables** which are made up of rows and columns.
 
-	![img1](images/img1.png)
+	![database-structure](images/database-structure.png)
 
 ## SQL Fundamentals
 
@@ -149,7 +149,7 @@ The important distinction is that each term describes a different aspect of SQL:
 - **Data Manipulation Language (DML):** command used to manipulate the data that is stored in the database (INSERT, DELETE, UPDATE).
 - **Data Query Language (DQL):** now we have data — to analyze the stored data we use this command, and we have the SELECT command.
 
-![img3](images/img3.png)
+![sql-command-types](images/sql-command-types.png)
 
 ## Clauses in Detail
 
@@ -187,16 +187,16 @@ The important distinction is that each term describes a different aspect of SQL:
 
 ## Execution Order vs Coding Order
 
-![img4](images/img4.png)
+![execution-vs-coding-order](images/execution-vs-coding-order.png)
 
 ### Execution Order
 
-![img5](images/img5.png)
+![execution-order](images/execution-order.png)
 
 ## Static Values
 - We can have a mix of values from the database and static values.
 
-![img6](images/img6.png)
+![static-values](images/static-values.png)
 
 ## Data Definition Language (DDL)
 - Define the structure of your data.
@@ -224,7 +224,7 @@ The important distinction is that each term describes a different aspect of SQL:
 - An operator is a symbol or keyword that performs an operation on values or expressions.
 - Logical operators are a specific category of operators used to combine or reverse conditions.
 
-![img7](images/img7.png)
+![filtering-operators](images/filtering-operators.png)
 
 ### Expression
 - Definition: An SQL expression is a combination of one or more values, operators, columns, and functions that the database engine evaluates to return a single data value.
@@ -244,7 +244,7 @@ The important distinction is that each term describes a different aspect of SQL:
 - A condition (often called a predicate or Boolean expression) is a specific type of expression that evaluates to a Boolean value (`TRUE`, `FALSE`, or `UNKNOWN`).
 - It is used to filter or control logic, typically inside `WHERE`, `HAVING`, or `ON` clauses.
 
-![img8](images/img8.png)
+![expression-and-condition](images/expression-and-condition.png)
 
 **Is a Comparison Condition Called a "Condition" or an "Expression"?**
 - It is both. In SQL terminology, a condition is just a specialized type of expression that evaluates to a Boolean value (`TRUE`, `FALSE`, or `UNKNOWN`).
@@ -253,5 +253,83 @@ The important distinction is that each term describes a different aspect of SQL:
 - In short: All conditions in SQL are expressions (specifically, ones that yield a true/false result), though not all expressions are used as conditions (e.g., an arithmetic expression like `2 + 3` yields a number, not a truth value).
 
 ### Comparison Operators
+\- These compare two values and produce a comparison result.
+![comparison-operators](images/comparison-operators.png)
 
-![img9](images/img9.png)
+```sql
+	SELECT * 
+	FROM users
+	WHERE age >= 18;
+```
+
+The >= operator compares each user's age with 18. The WHERE clause uses the comparison result to determine which rows qualify.
+
+![comparison-operator-example](images/comparison-operator-example.png)
+
+### Logical Operators
+\- Logical operators combine conditions or reverse a condition to form more complex logical tests.
+  The three main logical operators are AND, OR, and NOT.
+
+### Range Operator
+\- Boundary are inclusive, if we have score value exactly 100 or 500 it will be included on results.
+
+![range-operator](images/range-operator.png)
+
+### Membership Operator
+\- How IN and NOT IN  filter the row. If the column value is in the list we provided then it will include that row in the results
+
+![membership-operator](images/membership-operator.png) 
+>Note: Use IN operator instead of OR for multiple values in the same columnt to simplify SQL.
+
+**Example 1**
+![membership-operator-example-1](images/membership-operator-example-1.png)
+
+**Example 2** 
+![membership-operator-example-2](images/membership-operator-example-2.png)
+
+### Search Operators
+
+![search-operators](images/search-operators.png)
+
+### Summary of Operators
+
+![operators-summary](images/operators-summary.png)
+
+## Combining Data
+ \- Combining data from multiple table or sources. and for combining data we have set and joins.
+ ![combining-data-set-vs-joins](images/combining-data-set-vs-joins.png)
+
+we use set when we want to combine rows. in joins we combine table side by side and combine tables using columns.
+### Joins
+- Why we join tables?
+	1) Recombining data
+		![joins-recombining-data](images/joins-recombining-data.png)
+	  lets say we have customer data splits in multiple table and then later we want all the data of customer in a result then we can connect all the table together using sql joins which allow us query to combine all the table in one big results. 
+		
+	2) Data Enrichment
+	
+		![joins-data-enrichment](images/joins-data-enrichment.png) we can use sql join to get extra info in result. if we have customer table as master table
+		and we want information from another table like zip codes or help from another table which we called reference table or lookup table where we would like to add one extra infromation to master table. now we can join these to table to enhance our result.
+		
+	 3) Check for Existence (Filtering) 
+		
+		![joins-check-for-existence](images/joins-check-for-existence.png)
+		we don't want to combine data but we just join with another table to check the existence of  records. if we have customer and we want to look up or find or filter the custome based on customer has any order or not so we can join the reference table like orders and then filter based on that. in result we will not get any customer which doesn't have any order.
+
+\- Join Types
+ ![join-types](images/join-types.png)
+ ![join-types-2](images/join-types-2.png)
+
+-  No Joins
+	 ![no-joins](images/no-joins.png)
+
+- Inner Join
+	![inner-join](images/inner-join.png)
+
+	\- How Inner join get executed?
+	 ![inner-join-execution](images/inner-join-execution.png)
+
+     \- we can use inner joins to either recombine the data or to filter the data.
+
+- Left Join
+	![left-join](images/left-join.png)
