@@ -120,4 +120,27 @@ SELECT
 FROM customers c 
 CROSS JOIN orders o;
 
+-- Task 1
+-- using salesDb, retrieve a list of all orders, along with the related customers, product and employee details.
+-- For each order, display: orderId, customer's name, product name, sales, product price, salesperson name
+use salesDb;
+
+SELECT 
+	o.OrderID ,
+	c.FirstName AS CustomerFirstName,
+	c.LastName AS CustomerLastName,
+	p.Product AS ProductName,
+	o.Sales ,
+	p.Price ,
+	e.FirstName AS EmployeeFirstName,
+	e.LastName As EmpolyeeLastName
+FROM Sales.Orders o
+LEFT JOIN Sales.Customers c 
+	ON o.CustomerID = c.CustomerID 
+LEFT JOIN Sales.Products p 
+	ON o.ProductID = p.ProductID 
+LEFT JOIN Sales.Employees e 
+	ON o.SalesPersonID = e.EmployeeID ;
+
+
 

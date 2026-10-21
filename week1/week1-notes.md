@@ -536,3 +536,36 @@ CROSS JOIN orders o;
 ![cross-join-output](images/cross-join-output.png)
 
 ##### How To Choose Between Join Types?
+
+![choosing-join-types](images/choosing-join-types.png)
+
+##### Multi-Table Join
+
+![multi-table-join](images/multi-table-join.png)
+
+when doing analysis, the author starts with main table and if he need extra information he then left join other table one by one and see the results and at last use where clause to control what to keep. he could have use inner join but use left join with where clause because he get more flexibility on whether he want matching, unmatching data.
+
+\- **Visualizing the flow**
+![multi-table-join-flow](images/multi-table-join-flow.png)
+We get all data from A and then only matching data from B. then we left join C and we get only matching data from C. and how many other table we join we only get matching data.
+
+**Example**
+```sql
+-- using salesDb, retrieve a list of all orders, along with the related customers, product and employee details. For each order, display: orderId, customer's name, product name, sales, product price, salesperson name
+SELECT 
+	o.OrderID ,
+	c.FirstName AS CustomerFirstName,
+	c.LastName AS CustomerLastName,
+	p.Product AS ProductName,
+	o.Sales ,
+	p.Price ,
+	e.FirstName AS EmployeeFirstName,
+	e.LastName As EmpolyeeLastName
+FROM Sales.Orders o
+LEFT JOIN Sales.Customers c 
+	ON o.CustomerID = c.CustomerID 
+LEFT JOIN Sales.Products p 
+	ON o.ProductID = p.ProductID 
+LEFT JOIN Sales.Employees e 
+	ON o.SalesPersonID = e.EmployeeID ;
+```
