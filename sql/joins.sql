@@ -120,6 +120,14 @@ SELECT
 FROM customers c 
 CROSS JOIN orders o;
 
+-- Challenge 1
+-- Get all customer along with their orders, but only for customers who have place an order.
+SELECT *
+FROM customers c 
+LEFT JOIN orders o 
+	ON c.id = o.customer_id 
+WHERE o.customer_id IS NOT NULL;
+
 -- Task 1
 -- using salesDb, retrieve a list of all orders, along with the related customers, product and employee details.
 -- For each order, display: orderId, customer's name, product name, sales, product price, salesperson name
@@ -141,13 +149,4 @@ LEFT JOIN Sales.Products p
 	ON o.ProductID = p.ProductID 
 LEFT JOIN Sales.Employees e 
 	ON o.SalesPersonID = e.EmployeeID ;
-
-
--- Challenge 1
--- Get all customer along with their orders, but only for customers who have place an order.
-SELECT *
-FROM customers c 
-LEFT JOIN orders o 
-	ON c.id = o.customer_id 
-WHERE o.customer_id IS NOT NULL;
 

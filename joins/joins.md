@@ -1,6 +1,6 @@
 # Joins
 
-Part of [Combining Data](../combining-data/combining-data.md).
+← Previous: [Combining Data](../combining-data/combining-data.md) | [Index](../README.md) | Next → [Set Operators](../set-operators/set-operators.md)
 
 ## Why We Join Tables?
 

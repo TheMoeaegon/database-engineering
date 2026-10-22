@@ -1,6 +1,6 @@
 # Set Operators
 
-Part of [Combining Data](../combining-data/combining-data.md).
+← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [Practice (sql/)](../sql)
 
 ## Syntax of Set Operator
 ![set-operator-syntax](images/set-operator-syntax.png)

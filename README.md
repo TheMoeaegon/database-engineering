@@ -2,6 +2,19 @@
 
 A personal knowledge base for database concepts — organized by topic for quick look-up and re-understanding, not by week.
 
+## Reading Order
+
+Each note has **Previous / Next** links at the top, so you can read straight through:
+
+1. [Databases](databases/databases.md)
+2. [SQL Fundamentals](sql-fundamentals/sql-fundamentals.md)
+3. [SQL Commands](sql-commands/sql-commands.md)
+4. [Clauses](clauses/clauses.md)
+5. [Filtering Data](filtering/filtering.md)
+6. [Combining Data](combining-data/combining-data.md)
+7. [Joins](joins/joins.md)
+8. [Set Operators](set-operators/set-operators.md)
+
 ## Foundations
 
 | Topic | What's inside |

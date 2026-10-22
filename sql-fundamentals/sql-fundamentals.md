@@ -1,5 +1,7 @@
 # SQL Fundamentals
 
+← Previous: [Databases](../databases/databases.md) | [Index](../README.md) | Next → [SQL Commands](../sql-commands/sql-commands.md)
+
 ## Quick Overview
 - What is a **query**? → request information from the database.
 - What is a **statement**? → complete instruction.

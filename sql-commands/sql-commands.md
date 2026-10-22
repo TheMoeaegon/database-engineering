@@ -1,5 +1,7 @@
 # SQL Commands
 
+← Previous: [SQL Fundamentals](../sql-fundamentals/sql-fundamentals.md) | [Index](../README.md) | Next → [Clauses](../clauses/clauses.md)
+
 ## Command Categories
 - **Data Definition Language (DDL):** command used to define structure (we have CREATE, ALTER, and DROP).
 - **Data Manipulation Language (DML):** command used to manipulate the data that is stored in the database (INSERT, DELETE, UPDATE).

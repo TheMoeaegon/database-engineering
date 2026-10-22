@@ -1,5 +1,7 @@
 # Databases
 
+[Index](../README.md) | Next → [SQL Fundamentals](../sql-fundamentals/sql-fundamentals.md)
+
 ## What Is a Database?
 A database is like a container — it is a kind of organized collection of data.
 

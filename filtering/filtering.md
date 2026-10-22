@@ -1,5 +1,7 @@
 # Filtering Data
 
+← Previous: [Clauses](../clauses/clauses.md) | [Index](../README.md) | Next → [Combining Data](../combining-data/combining-data.md)
+
 ## Operators
 - An operator is a symbol or keyword that performs an operation on values or expressions.
 - Logical operators are a specific category of operators used to combine or reverse conditions.

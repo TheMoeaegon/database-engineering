@@ -1,5 +1,7 @@
 # Combining Data
 
+← Previous: [Filtering Data](../filtering/filtering.md) | [Index](../README.md) | Next → [Joins](../joins/joins.md)
+
 \- Combining data from multiple table or sources. and for combining data we have set and joins.
 
 ![combining-data-set-vs-joins](images/combining-data-set-vs-joins.png)

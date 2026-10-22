@@ -52,7 +52,6 @@ SELECT
 FROM Sales.Customers c 
 
 -- Task 1
-
 -- Orders are stored in separate table (Orders and Order Archive). Combine all orders into one report without duplicates.
 SELECT 
 	*

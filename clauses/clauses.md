@@ -1,5 +1,7 @@
 # Clauses
 
+← Previous: [SQL Commands](../sql-commands/sql-commands.md) | [Index](../README.md) | Next → [Filtering Data](../filtering/filtering.md)
+
 ## Common Clauses
 - `SELECT`
 - `DISTINCT`
