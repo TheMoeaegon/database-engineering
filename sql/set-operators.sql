@@ -53,13 +53,37 @@ FROM Sales.Customers c
 
 -- Task 1
 -- Orders are stored in separate table (Orders and Order Archive). Combine all orders into one report without duplicates.
-SELECT 
-	*
-FROM Sales.Orders o 
+SELECT
+	'Orders' AS SourceTable,
+	OrderID,
+	ProductID, 
+	CustomerID, 
+	SalesPersonID,
+	OrderDate, 
+	ShipDate, 
+	OrderStatus, 
+	ShipAddress,
+	BillAddress, 
+	Quantity, 
+	Sales, 
+	CreationTime
+FROM Sales.Orders
 UNION 
 SELECT 
-	*
-FROM Sales.OrdersArchive oa 
-
+	'OrderArchive' AS SourceTable,
+	OrderID,
+	ProductID, 
+	CustomerID, 
+	SalesPersonID,
+	OrderDate, 
+	ShipDate, 
+	OrderStatus, 
+	ShipAddress,
+	BillAddress, 
+	Quantity, 
+	Sales, 
+	CreationTime
+FROM Sales.OrdersArchive oa
+ORDER BY OrderID;
 
 

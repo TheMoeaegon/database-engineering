@@ -145,3 +145,62 @@ Here we have one single big table and one sql query.
 
 **Example 2 with set operators**
 ![union-use-case-reporting](images/union-use-case-reporting.png)
+
+**Example**
+```sql
+-- Orders are stored in separate table (Orders and Order Archive). Combine all orders into one report without duplicates.
+SELECT
+	'Orders' AS SourceTable,
+	OrderID,
+	ProductID, 
+	CustomerID, 
+	SalesPersonID,
+	OrderDate, 
+	ShipDate, 
+	OrderStatus, 
+	ShipAddress,
+	BillAddress, 
+	Quantity, 
+	Sales, 
+	CreationTime
+FROM Sales.Orders
+UNION 
+SELECT 
+	'OrderArchive' AS SourceTable,
+	OrderID,
+	ProductID, 
+	CustomerID, 
+	SalesPersonID,
+	OrderDate, 
+	ShipDate, 
+	OrderStatus, 
+	ShipAddress,
+	BillAddress, 
+	Quantity, 
+	Sales, 
+	CreationTime
+FROM Sales.OrdersArchive oa
+ORDER BY OrderID;
+```
+
+## Except Use Case
+### **Delta Detection**
+\- Identify the difference or change (delta) between two batches of data.
+
+![except-use-case-delta-detection](images/except-use-case-delta-detection.png)
+
+![except-use-case-delta-detection-tables](images/except-use-case-delta-detection-tables.png)
+
+### Data Completeness Check
+\- EXCEPT operator can be used to compare tables to detect discrepancies between databases.
+
+**Example**
+![except-use-case-data-completeness](images/except-use-case-data-completeness.png)
+let's say we are doing data migration between two database. where we want to migrate table from database A to database B. now first we load the table from db A to db B , now to check if all the records move from table A to Table B we can use EXCEPT set operators to data completeness test.
+\- first test is we can use except to check if there is any record still in table of database A that is not in table of database B. the result should be empty which means all the records in database A table exits in table of database B.
+\- another test is we can use expect to find any row that is in table of database B that is not in table of database A because both table in database A and B must be identical.
+So, if both are empty then we can be sure that these both table are identical and we are not missing anything. Therefore, we can use EXCEPT set operator to prove quality of data migration and to do data completeness test.
+
+### Summary of Set Operators
+
+![set-operators-summary](images/set-operators-summary.png)

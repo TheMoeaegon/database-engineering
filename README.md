@@ -17,11 +17,11 @@ Each note has **Previous / Next** links at the top, so you can read straight thr
 
 ## Foundations
 
-| Topic | What's inside |
-| --- | --- |
-| [Databases](databases/databases.md) | What a database is, why we need one, why DBMS, types of databases, database structure (server → database → schema → table) |
-| [SQL Fundamentals](sql-fundamentals/sql-fundamentals.md) | Statement, query, clause, operator, operand, predicate and how they fit together |
-| [SQL Commands](sql-commands/sql-commands.md) | Command categories (DDL, DML, DQL) and the DDL/DML commands |
+| Topic                                                    | What's inside                                                                                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [Databases](databases/databases.md)                      | What a database is, why we need one, why DBMS, types of databases, database structure (server → database → schema → table) |
+| [SQL Fundamentals](sql-fundamentals/sql-fundamentals.md) | Statement, query, clause, operator, operand, predicate and how they fit together                                           |
+| [SQL Commands](sql-commands/sql-commands.md)             | Command categories (DDL, DML, DQL) and the DDL/DML commands                                                                |
 
 ## Querying
 
