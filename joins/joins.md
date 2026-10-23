@@ -1,8 +1,8 @@
-# Joins
+## Joins
 
 ← Previous: [Combining Data](../combining-data/combining-data.md) | [Index](../README.md) | Next → [Set Operators](../set-operators/set-operators.md)
 
-## Why We Join Tables?
+### Why We Join Tables?
 
 1) **Recombining data**
    ![joins-recombining-data](images/joins-recombining-data.png)
@@ -20,15 +20,15 @@
 
    we don't want to combine data but we just join with another table to check the existence of records. if we have customer and we want to look up or find or filter the custome based on customer has any order or not so we can join the reference table like orders and then filter based on that. in result we will not get any customer which doesn't have any order.
 
-## Join Types
+### Join Types
 
 ![join-types](images/join-types.png)
 
 ![join-types-2](images/join-types-2.png)
 
-### Basic Joins
+#### Basic Joins
 
-#### No Join
+##### No Join
 
 - Returns data from the tables without combining them.
 
@@ -41,7 +41,7 @@ SELECT * FROM customers c;
 
 SELECT * FROM orders o;
 ```
-#### Inner Join
+##### Inner Join
 
 - Returns only matching rows from both tables.
 - The order of the tables doesn't matter.
@@ -67,7 +67,7 @@ INNER JOIN orders AS o
     ON c.id = o.customer_id;
 ```
 
-#### Left Join
+##### Left Join
 
 - Returns all rows from the left table and only matching rows from the right table.
 
@@ -88,7 +88,7 @@ LEFT JOIN orders o
     ON c.id = o.customer_id;
 ```
 
-#### Right Join
+##### Right Join
 
 - Returns all rows from the right table and only matching rows from the left table.
 
@@ -120,7 +120,7 @@ LEFT JOIN customers c
     ON o.customer_id = c.id;
 ```
 
-#### Full Join
+##### Full Join
 
 - Returns all rows from both tables, matching rows where possible.
 
@@ -139,9 +139,9 @@ FULL JOIN orders o
     ON c.id = o.customer_id;
 ```
 
-### Advanced Joins
+#### Advanced Joins
 
-#### LEFT ANTI JOIN
+##### LEFT ANTI JOIN
 
 - Return Row from left that has **NO MATCH** in Right table.
 
@@ -161,7 +161,7 @@ LEFT JOIN orders o
 WHERE o.customer_id is NULL;
 ```
 
-#### RIGHT ANTI JOIN
+##### RIGHT ANTI JOIN
 
 - Return Row from right table that has **NO MATCH** in light table.
 
@@ -195,7 +195,7 @@ LEFT JOIN customers c
 WHERE c.id IS NULL;
 ```
 
-#### FULL ANTI JOIN
+##### FULL ANTI JOIN
 
 - Return only rows that don't match in either tables. it is opposite of inner join where we get only matching data in full anti join we only get unmatching data.
 
@@ -215,7 +215,7 @@ FULL JOIN orders o
 WHERE o.customer_id IS NULL OR c.id IS NULL;
 ```
 
-#### CROSS JOIN
+##### CROSS JOIN
 
 - combines every row from left with every row from right.
 
@@ -233,11 +233,11 @@ CROSS JOIN orders o;
 \- Output of Cross JOIN
 ![cross-join-output](images/cross-join-output.png)
 
-### How To Choose Between Join Types?
+#### How To Choose Between Join Types?
 
 ![choosing-join-types](images/choosing-join-types.png)
 
-### Multi-Table Join
+#### Multi-Table Join
 
 ![multi-table-join](images/multi-table-join.png)
 

@@ -1,20 +1,20 @@
-# SQL Commands
+## SQL Commands
 
 ← Previous: [SQL Fundamentals](../sql-fundamentals/sql-fundamentals.md) | [Index](../README.md) | Next → [Clauses](../clauses/clauses.md)
 
-## Command Categories
+### Command Categories
 - **Data Definition Language (DDL):** command used to define structure (we have CREATE, ALTER, and DROP).
 - **Data Manipulation Language (DML):** command used to manipulate the data that is stored in the database (INSERT, DELETE, UPDATE).
 - **Data Query Language (DQL):** now we have data — to analyze the stored data we use this command, and we have the SELECT command.
 
 ![sql-command-types](images/sql-command-types.png)
 
-## Data Definition Language (DDL)
+### Data Definition Language (DDL)
 - Define the structure of your data.
 - These commands will never return data; they change the structure of the database.
 - We have CREATE, ALTER, and DROP statements.
 
-## Data Manipulation Language (DML)
+### Data Manipulation Language (DML)
 - Modify (manipulate) your data.
 - We have INSERT, UPDATE, and DELETE.
 

@@ -1,11 +1,11 @@
-# Set Operators
+## Set Operators
 
-← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [Practice (sql/)](../sql)
+← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [SQL Functions](../functions/Sql%20functions.md)
 
-## Syntax of Set Operator
+### Syntax of Set Operator
 ![set-operator-syntax](images/set-operator-syntax.png)
 
-## Rules of Set Operator
+### Rules of Set Operator
 1) SQL Clauses 
     - SET Operators can be used almost in all clauses WHERE | JOIN | GROUP BY | HAVING
     - ORDER BY is allowed only once at the end of the query
@@ -26,8 +26,8 @@
 ![set-operator-rules](images/set-operator-rules.png)
 
 
-## Union Types
-### UNION
+### Union Types
+#### UNION
 \- Returns all distinct rows from both queries.
 \- Removes duplicate rows from the result
 ![union-distinct](images/union-distinct.png)
@@ -53,7 +53,7 @@ The order of queries in a UNION operation does not affect the result.
 **How SQL execute the UNION**
 ![union-execution](images/union-execution.png)
 
-### UNION ALL
+#### UNION ALL
 \- Return all rows from both queries, including duplicates
 \- Only set operator that doesn't remove duplicate and return result as it is.
 
@@ -81,7 +81,7 @@ FROM Sales.Customers c
 
 **How SQL execute the UNION ALL**
 ![union-all-execution](images/union-all-execution.png)
-### EXCEPT
+#### EXCEPT
 \- Return all distinct rows from the first query that are not found in the second query
 \- It is only one where the order of the queries affect the final result.
 
@@ -111,7 +111,7 @@ It doesn't put any data from second query or set which is customer here. it only
 
 ![except-order-result](images/except-order-result.png)
 The order of query is important because we get different result if order is different.
-### INTERSECT
+#### INTERSECT
 \- Returns only the rows that are common in both queries.
 ![intersect-result](images/intersect-result.png)
 
@@ -131,8 +131,8 @@ FROM Sales.Customers c
 
 **How SQL execute the INTERSECT**
 ![intersect-execution](images/intersect-execution.png)
-## Union Use Cases
-### **Combine Information**
+### Union Use Cases
+#### **Combine Information**
 \- Combine similar information before analyzing the data
 
 **Example**
@@ -183,15 +183,15 @@ FROM Sales.OrdersArchive oa
 ORDER BY OrderID;
 ```
 
-## Except Use Case
-### **Delta Detection**
+### Except Use Case
+#### **Delta Detection**
 \- Identify the difference or change (delta) between two batches of data.
 
 ![except-use-case-delta-detection](images/except-use-case-delta-detection.png)
 
 ![except-use-case-delta-detection-tables](images/except-use-case-delta-detection-tables.png)
 
-### Data Completeness Check
+#### Data Completeness Check
 \- EXCEPT operator can be used to compare tables to detect discrepancies between databases.
 
 **Example**
@@ -201,6 +201,6 @@ let's say we are doing data migration between two database. where we want to mig
 \- another test is we can use expect to find any row that is in table of database B that is not in table of database A because both table in database A and B must be identical.
 So, if both are empty then we can be sure that these both table are identical and we are not missing anything. Therefore, we can use EXCEPT set operator to prove quality of data migration and to do data completeness test.
 
-### Summary of Set Operators
+#### Summary of Set Operators
 
 ![set-operators-summary](images/set-operators-summary.png)

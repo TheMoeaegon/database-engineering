@@ -1,13 +1,13 @@
-# SQL Fundamentals
+## SQL Fundamentals
 
 ← Previous: [Databases](../databases/databases.md) | [Index](../README.md) | Next → [SQL Commands](../sql-commands/sql-commands.md)
 
-## Quick Overview
+### Quick Overview
 - What is a **query**? → request information from the database.
 - What is a **statement**? → complete instruction.
 - What is a **clause**? → a logical section of a statement (see below).
 
-## SQL Statement
+### SQL Statement
 - Definition: An SQL statement is a complete instruction written in SQL that tells a database to perform an operation.
 - A statement can retrieve data, insert records, update existing records, delete records, or modify the database structure.
 
@@ -40,7 +40,7 @@ Each example is a complete SQL statement.
 - **DCL (Data Control Language):** Manages database permissions.
 - **TCL (Transaction Control Language):** Manages transactions using commands such as `COMMIT` and `ROLLBACK`.
 
-## SQL Query
+### SQL Query
 - Definition: A query is generally a request to retrieve or examine information stored in a database. In everyday development, the term is also frequently used more broadly to refer to SQL instructions in general.
 
 **Example:**
@@ -57,7 +57,7 @@ This query requests the names and ages of users who are at least 18 years old.
   - A **query**, in its narrower sense, requests information from a database.
   - For example, `SELECT` is typically used for querying data, while `INSERT` is a statement that adds data.
 
-## SQL Clause
+### SQL Clause
 - Definition: A clause is a logical section of an SQL statement that performs a specific role in the instruction.
 
 Consider this query:
@@ -85,11 +85,11 @@ It contains the following clauses:
 
 > Note: A clause is generally not a complete statement on its own. For example, `WHERE age >= 18` is a clause that must be part of a suitable SQL statement.
 
-## SQL Operator
+### SQL Operator
 - Definition: An operator is a symbol or keyword that performs an operation on one or more operands, such as calculating a value, comparing values, or combining conditions.
 - An **operand** is a value or other input on which an operator acts.
 
-## Summary: How These Concepts Fit Together
+### Summary: How These Concepts Fit Together
 
 Consider this complete SQL statement:
 ```sql
