@@ -3,31 +3,34 @@
 ← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [SQL Functions](../functions/Sql%20functions.md)
 
 ### Syntax of Set Operator
+
 ![set-operator-syntax](images/set-operator-syntax.png)
 
 ### Rules of Set Operator
-1) SQL Clauses 
+
+1) SQL Clauses
     - SET Operators can be used almost in all clauses WHERE | JOIN | GROUP BY | HAVING
     - ORDER BY is allowed only once at the end of the query
-	![set-operator-clauses](images/set-operator-clauses.png)
-	
+    ![set-operator-clauses](images/set-operator-clauses.png)
+
 2) Number of columns
-	- The number of columns in each query must be the same.
+    - The number of columns in each query must be the same.
 3)  Data Types
-	- Data types of columns in each query must be compatible
-4) Order of Columns 
-	- The order of the columns in each query must be the same
-5) Column Aliases 
-	- The column names in the result set are determined by the column name specified in the first query.
+    - Data types of columns in each query must be compatible
+4) Order of Columns
+    - The order of the columns in each query must be the same
+5) Column Aliases
+    - The column names in the result set are determined by the column name specified in the first query.
 6) Correct Columns
-	- Even if all rules are met and SQL shows no errors, the result may be incorrect.
-	- Incorrect columns selections leads to inaccurate results.
+    - Even if all rules are met and SQL shows no errors, the result may be incorrect.
+    - Incorrect columns selections leads to inaccurate results.
 
 ![set-operator-rules](images/set-operator-rules.png)
 
-
 ### Union Types
+
 #### UNION
+
 \- Returns all distinct rows from both queries.
 \- Removes duplicate rows from the result
 ![union-distinct](images/union-distinct.png)
@@ -36,24 +39,27 @@ Since we have mary and kevin in both set so union will return only one in the re
 ![union-result](images/union-result.png)
 
 **Example**
+
 ```sql
 -- Combine the data from employess and customer into one table
-SELECT 
-	e.FirstName,
-	e.LastName 
-FROM Sales.Employees e 
-UNION 
-SELECT 
-	c.FirstName,
-	c.LastName 
+SELECT
+    e.FirstName,
+    e.LastName
+FROM Sales.Employees e
+UNION
+SELECT
+    c.FirstName,
+    c.LastName
 FROM Sales.Customers c
 ```
-The order of queries in a UNION operation does not affect the result.  
+
+The order of queries in a UNION operation does not affect the result.
 
 **How SQL execute the UNION**
 ![union-execution](images/union-execution.png)
 
 #### UNION ALL
+
 \- Return all rows from both queries, including duplicates
 \- Only set operator that doesn't remove duplicate and return result as it is.
 
@@ -66,22 +72,25 @@ The order of queries in a UNION operation does not affect the result.
 Union all is gonna return all from customers and all from employees. and kevin and mary is twice in the output.
 
 **Example**
+
 ```sql
 -- Combine the data from employess and customer into one table, including duplicates.
-SELECT 
-	e.FirstName ,
-	e.LastName 
-FROM Sales.Employees e 
+SELECT
+    e.FirstName ,
+    e.LastName
+FROM Sales.Employees e
 UNION ALL
-SELECT 
-	c.FirstName ,
-	c.LastName 
-FROM Sales.Customers c 
+SELECT
+    c.FirstName ,
+    c.LastName
+FROM Sales.Customers c
 ```
 
 **How SQL execute the UNION ALL**
 ![union-all-execution](images/union-all-execution.png)
+
 #### EXCEPT
+
 \- Return all distinct rows from the first query that are not found in the second query
 \- It is only one where the order of the queries affect the final result.
 
@@ -92,17 +101,18 @@ FROM Sales.Customers c
 We get Jossef, mark and anna in the result set because they are not in employee set. and kevin and mary are not included in the result set because they are not unique and also member of second set employee. So, we get only three customer as a result.
 
 **Example**
+
 ```sql
 -- find employess who are not customer at the same time
-SELECT 
-	e.FirstName ,
-	e.LastName 
-FROM Sales.Employees e 
-EXCEPT 
-SELECT 
-	c.FirstName ,
-	c.LastName 
-FROM Sales.Customers c 
+SELECT
+    e.FirstName ,
+    e.LastName
+FROM Sales.Employees e
+EXCEPT
+SELECT
+    c.FirstName ,
+    c.LastName
+FROM Sales.Customers c
 ```
 
 **How SQL execute the EXCEPT**
@@ -111,28 +121,34 @@ It doesn't put any data from second query or set which is customer here. it only
 
 ![except-order-result](images/except-order-result.png)
 The order of query is important because we get different result if order is different.
+
 #### INTERSECT
+
 \- Returns only the rows that are common in both queries.
 ![intersect-result](images/intersect-result.png)
 
 **Example**
+
 ```sql
 -- find employees who are also customers
-SELECT 
-	e.FirstName ,
-	e.LastName 
-FROM Sales.Employees e 
-INTERSECT 
-SELECT 
-	c.FirstName,
-	c.LastName 
-FROM Sales.Customers c 
+SELECT
+    e.FirstName ,
+    e.LastName
+FROM Sales.Employees e
+INTERSECT
+SELECT
+    c.FirstName,
+    c.LastName
+FROM Sales.Customers c
 ```
 
 **How SQL execute the INTERSECT**
 ![intersect-execution](images/intersect-execution.png)
+
 ### Union Use Cases
+
 #### **Combine Information**
+
 \- Combine similar information before analyzing the data
 
 **Example**
@@ -147,44 +163,47 @@ Here we have one single big table and one sql query.
 ![union-use-case-reporting](images/union-use-case-reporting.png)
 
 **Example**
+
 ```sql
 -- Orders are stored in separate table (Orders and Order Archive). Combine all orders into one report without duplicates.
 SELECT
-	'Orders' AS SourceTable,
-	OrderID,
-	ProductID, 
-	CustomerID, 
-	SalesPersonID,
-	OrderDate, 
-	ShipDate, 
-	OrderStatus, 
-	ShipAddress,
-	BillAddress, 
-	Quantity, 
-	Sales, 
-	CreationTime
+    'Orders' AS SourceTable,
+    OrderID,
+    ProductID,
+    CustomerID,
+    SalesPersonID,
+    OrderDate,
+    ShipDate,
+    OrderStatus,
+    ShipAddress,
+    BillAddress,
+    Quantity,
+    Sales,
+    CreationTime
 FROM Sales.Orders
-UNION 
-SELECT 
-	'OrderArchive' AS SourceTable,
-	OrderID,
-	ProductID, 
-	CustomerID, 
-	SalesPersonID,
-	OrderDate, 
-	ShipDate, 
-	OrderStatus, 
-	ShipAddress,
-	BillAddress, 
-	Quantity, 
-	Sales, 
-	CreationTime
+UNION
+SELECT
+    'OrderArchive' AS SourceTable,
+    OrderID,
+    ProductID,
+    CustomerID,
+    SalesPersonID,
+    OrderDate,
+    ShipDate,
+    OrderStatus,
+    ShipAddress,
+    BillAddress,
+    Quantity,
+    Sales,
+    CreationTime
 FROM Sales.OrdersArchive oa
 ORDER BY OrderID;
 ```
 
 ### Except Use Case
+
 #### **Delta Detection**
+
 \- Identify the difference or change (delta) between two batches of data.
 
 ![except-use-case-delta-detection](images/except-use-case-delta-detection.png)
@@ -192,6 +211,7 @@ ORDER BY OrderID;
 ![except-use-case-delta-detection-tables](images/except-use-case-delta-detection-tables.png)
 
 #### Data Completeness Check
+
 \- EXCEPT operator can be used to compare tables to detect discrepancies between databases.
 
 **Example**

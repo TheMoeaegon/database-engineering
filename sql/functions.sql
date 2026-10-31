@@ -94,5 +94,61 @@ SELECT
 	ABS(-10),
 	ABS(10)
 
+-- DATE FUNCTIONS
 
+-- YEAR, MONTH, DAY
+SELECT 
+	o.OrderID ,
+	o.CreationTime,
+	YEAR(o.CreationTime ) as Year,
+	MONTH(o.CreationTime ) as Month,
+	DAY(o.CreationTime ) as  Day
+FROM Sales.Orders o 
+
+-- DATEPART
+SELECT 
+	o.OrderID ,
+	o.CreationTime,
+	DATEPART(year, o.CreationTime ) as Year_dp,
+	DATEPART(month, o.CreationTime ) as Month_dp,
+	DATEPART(day, o.CreationTime ) as Day_dp,
+	DATEPART(hour, o.CreationTime ) as Hour,
+	DATEPART(quarter, o.CreationTime ) as Quater_dp,
+	DATEPART(week, o.CreationTime ) as Week_dp
+FROM Sales.Orders o 
+
+-- DATENAME
+SELECT 
+	o.OrderID ,
+	o.CreationTime ,
+	DATENAME(month, o.CreationTime ) as mon_day,
+	DATENAME(weekday, o.creationTime) as week_day,
+	DATENAME(day, o.creationTime) as day_name,
+	DATENAME(year, o.creationTime) as year_dn,
+	DATEPART(month, o.CreationTime ) as mon_dp,
+	DATEPART(week, o.CreationTime ) as week_dp
+FROM Sales.Orders o 
+ 
+-- DATETRUNC
+SELECT 
+	o.OrderID ,
+	o.CreationTime,
+	DATETRUNC(minute, o.CreationTime ) as minute_dt,
+	DATETRUNC(day, o.CreationTime ) as day_dt,
+	DATETRUNC(year, o.CreationTime ) as year_dt
+FROM Sales.Orders o 
+
+-- USE CASE
+SELECT 
+	DATETRUNC(month, o.CreationTime),
+	COUNT(*)
+FROM Sales.Orders o
+GROUP BY DATETRUNC(month, o.CreationTime)
+
+	
+	
+	
+	
+	
+	
 

@@ -35,12 +35,14 @@
 ![no-joins](images/no-joins.png)
 
 **Example**
+
 ```sql
 -- Retrieve all data from customers and orders as separate results
 SELECT * FROM customers c;
 
 SELECT * FROM orders o;
 ```
+
 ##### Inner Join
 
 - Returns only matching rows from both tables.
@@ -55,6 +57,7 @@ SELECT * FROM orders o;
 - We can use inner joins to either recombine the data or to filter the data.
 
 **Example**
+
 ```sql
 -- Get all customers along with their orders, but only for customers who have placed an order
 SELECT
@@ -76,6 +79,7 @@ INNER JOIN orders AS o
 ![left-join-example](images/left-join-example.png)
 
 **Example**
+
 ```sql
 -- Get all customers along with their orders, including those without orders.
 SELECT
@@ -95,6 +99,7 @@ LEFT JOIN orders o
 ![right-join](images/right-join.png)
 
 **Example**
+
 ```sql
 -- Get all customers along with their orders, including orders without matching customers.
 SELECT
@@ -127,6 +132,7 @@ LEFT JOIN customers c
 ![full-join](images/full-join.png)
 
 **Example**
+
 ```sql
 -- Get all customers and all orders, even if there's no match
 SELECT
@@ -148,16 +154,17 @@ FULL JOIN orders o
 ![left-anti-join](images/left-anti-join.png)
 
 **Example**
+
 ```sql
 -- Get all customers who haven't placed any order.
 SELECT
-	c.id ,
-	c.first_name ,
-	o.order_id ,
-	o.sales
+    c.id ,
+    c.first_name ,
+    o.order_id ,
+    o.sales
 FROM customers c
 LEFT JOIN orders o
-	ON c.id = o.customer_id
+    ON c.id = o.customer_id
 WHERE o.customer_id is NULL;
 ```
 
@@ -168,30 +175,31 @@ WHERE o.customer_id is NULL;
 ![right-anti-join](images/right-anti-join.png)
 
 **Example**
+
 ```sql
 -- Get all orders without matching customers // all orders without valid customers
-SELECT 
-	c.id ,
-	c.first_name ,
-	o.order_id ,
-	o.sales 
-FROM customers c 
-RIGHT JOIN orders o 
-	ON c.id = o.customer_id
+SELECT
+    c.id ,
+    c.first_name ,
+    o.order_id ,
+    o.sales
+FROM customers c
+RIGHT JOIN orders o
+    ON c.id = o.customer_id
 WHERE c.id IS NULL;
 ```
 
 - A right join can also be written as a left join by swapping the table order:
 
 ```sql
-SELECT 
-	c.id ,
-	c.first_name ,
-	o.order_id ,
-	o.sales 
-FROM orders o 
-LEFT JOIN customers c 
-	ON o.customer_id = c.id 
+SELECT
+    c.id ,
+    c.first_name ,
+    o.order_id ,
+    o.sales
+FROM orders o
+LEFT JOIN customers c
+    ON o.customer_id = c.id
 WHERE c.id IS NULL;
 ```
 
@@ -202,16 +210,17 @@ WHERE c.id IS NULL;
 ![full-anti-join](images/full-anti-join.png)
 
 **Example**
+
 ```sql
 -- find customers without orders and orders without customers
-SELECT 
-	c.id,
-	c.first_name ,
-	o.order_id ,
-	o.sales 
-FROM customers c 
-FULL JOIN orders o 
-	ON c.id = o.customer_id
+SELECT
+    c.id,
+    c.first_name ,
+    o.order_id ,
+    o.sales
+FROM customers c
+FULL JOIN orders o
+    ON c.id = o.customer_id
 WHERE o.customer_id IS NULL OR c.id IS NULL;
 ```
 
@@ -222,11 +231,12 @@ WHERE o.customer_id IS NULL OR c.id IS NULL;
 ![cross-join](images/cross-join.png)
 
 **Example**
+
 ```sql
 -- Generate all possible combinations of customers and orders
-SELECT 
-	*
-FROM customers c 
+SELECT
+    *
+FROM customers c
 CROSS JOIN orders o;
 ```
 
@@ -248,22 +258,23 @@ when doing analysis, the author starts with main table and if he need extra info
 We get all data from A and then only matching data from B. then we left join C and we get only matching data from C. and how many other table we join we only get matching data.
 
 **Example**
+
 ```sql
 -- using salesDb, retrieve a list of all orders, along with the related customers, product and employee details. For each order, display: orderId, customer's name, product name, sales, product price, salesperson name
-SELECT 
-	o.OrderID ,
-	c.FirstName AS CustomerFirstName,
-	c.LastName AS CustomerLastName,
-	p.Product AS ProductName,
-	o.Sales ,
-	p.Price ,
-	e.FirstName AS EmployeeFirstName,
-	e.LastName As EmpolyeeLastName
+SELECT
+    o.OrderID ,
+    c.FirstName AS CustomerFirstName,
+    c.LastName AS CustomerLastName,
+    p.Product AS ProductName,
+    o.Sales ,
+    p.Price ,
+    e.FirstName AS EmployeeFirstName,
+    e.LastName As EmpolyeeLastName
 FROM Sales.Orders o
-LEFT JOIN Sales.Customers c 
-	ON o.CustomerID = c.CustomerID 
-LEFT JOIN Sales.Products p 
-	ON o.ProductID = p.ProductID 
-LEFT JOIN Sales.Employees e 
-	ON o.SalesPersonID = e.EmployeeID ;
+LEFT JOIN Sales.Customers c
+    ON o.CustomerID = c.CustomerID
+LEFT JOIN Sales.Products p
+    ON o.ProductID = p.ProductID
+LEFT JOIN Sales.Employees e
+    ON o.SalesPersonID = e.EmployeeID ;
 ```
