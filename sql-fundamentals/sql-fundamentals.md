@@ -108,11 +108,11 @@ It contains the following clauses:
 Consider this complete SQL statement:
 
 ```sql
-    SELECT name, price
-    FROM products
-    WHERE price >= 100
-      AND category_id IN (2, 3, 4)
-    ORDER BY price DESC;
+SELECT name, price
+FROM products
+WHERE price >= 100
+    AND category_id IN (2, 3, 4)
+ORDER BY price DESC;
 ```
 
 The statement can be understood at several levels:

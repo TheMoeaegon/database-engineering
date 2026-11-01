@@ -17,17 +17,15 @@ We have data inside table and we can perform different operation on data like we
 \- Function use inside another function.
 ![nested-functions](images/nested-functions.png)
 
-### Types of SQL Functions
+### Types of SQL Functions (Single-Row / Row-Level Calculation)
 
 ![types-of-sql-functions](images/types-of-sql-functions.png)
 
-#### Single-Row Function (Row-Level-Calculation)
-
-##### String Functions
+#### String Functions
 
 ![string-functions](images/string-functions.png)
 
-**Manipulation**
+##### Manipulation
 
 ###### **CONCAT**
 
@@ -97,10 +95,10 @@ SELECT
 -- Replace File Extension from txt to csv
 SELECT
     'reports.txt' AS old_filename,
-     REPLACE('reports.txt', '.txt', '.csv')
+    REPLACE('reports.txt', '.txt', '.csv')
 ```
 
-**Calculation**
+##### Calculation
 
 ###### **LEN**
 
@@ -118,7 +116,7 @@ SELECT
 FROM customers c
 ```
 
-**String Extraction**
+##### String Extraction
 
 ###### **LEFT**
 
@@ -161,7 +159,7 @@ SELECT
 FROM customers c
 ```
 
-##### Number Functions
+#### Number Functions
 
 ###### **ROUND**
 
@@ -190,12 +188,7 @@ SELECT
     ABS(10)
 ```
 
-##### Date & Time Functions
-
-**GETDATE**
-
-\- We can use GETDATE function to get date value. it is one of 3 ways to get date value in sql. first way is to get from column value with date type, second is static value and last way is to use GETDATE function.
-\- return the current date and time at the moment when the query is executed.
+#### Date & Time Functions
 
 **Manipulation Date**
 
@@ -206,7 +199,12 @@ We can use different operation to manipulate date. we can manipulate the date va
 
 ![date-time-functions](images/date-time-functions.png)
 
-**Part Extraction**
+###### **GETDATE**
+
+\- We can use GETDATE function to get date value. it is one of 3 ways to get date value in sql. first way is to get from column value with date type, second is static value and last way is to use GETDATE function.
+\- return the current date and time at the moment when the query is executed.
+
+##### Part Extraction
 
 ###### **DAY**
 
@@ -230,7 +228,7 @@ SELECT
     o.CreationTime,
     YEAR(o.CreationTime ) as Year,
     MONTH(o.CreationTime ) as Month,
-    DAY(o.CreationTime ) as  Day
+    DAY(o.CreationTime ) as Day
 FROM Sales.Orders o
 ```
 
@@ -457,9 +455,7 @@ WHERE MONTH(o.OrderDate ) = 2
 
 ![date-parts-all](images/date-parts-all.png)
 
-**Format & Casting**
-
-###### What is Date Format?
+##### What is Date Format?
 
 \- format specifier (how date is stored)
 ![date-format-parts](images/date-format-parts.png)
@@ -467,14 +463,10 @@ This whole is data format representation of this value. In world, there are diff
 
 ![date-format-standards](images/date-format-standards.png)
 
-###### **Formatting**
+##### Formatting
 
 Changing the format of a value from one to another. We are just changing how the value looks like.
 ![formatting-examples](images/formatting-examples.png)
-
-###### **Casting**
-
-Changing the data type from one to another
 
 ###### **FORMAT**
 
@@ -517,7 +509,9 @@ FROM Sales.Orders o
 -- Day Wed Jan Q1 2025 12:34:56 PM
 SELECT
     o.CreationTime,
-    'Day ' + FORMAT(o.CreationTime , 'ddd MMM') + ' Q' + DATENAME(quarter,           o.CreationTime ) + ' ' + FORMAT(o.CreationTime , 'yyyy hh:mm:ss tt') AS          'format_creation_time'
+    'Day ' + FORMAT(o.CreationTime , 'ddd MMM') + ' Q'
+        + DATENAME(quarter, o.CreationTime) + ' '
+        + FORMAT(o.CreationTime , 'yyyy hh:mm:ss tt') AS 'format_creation_time'
 FROM Sales.Orders o
 ```
 
@@ -565,6 +559,10 @@ GROUP BY FORMAT(o.OrderDate , 'MMM yy')
 **Number Format**
 
 ![all-format-number](images/all-format-number.png)
+
+##### Casting
+
+Changing the data type from one to another
 
 ###### **CONVERT**
 
@@ -626,6 +624,6 @@ FROM Sales.Orders o
 | 2025-03-10 12:59:04.000 | 123           | 2025-03-10       | 2025-08-20     |
 | 2025-03-16 23:25:15.000 | 123           | 2025-03-16       | 2025-08-20     |
 
-###### **FORMAT VS CONVERT VS CAST**
+##### FORMAT VS CONVERT VS CAST
 
 ![format-vs-convert-vs-cast](images/format-vs-convert-vs-cast.png)

@@ -218,3 +218,5 @@ SELECT
     CAST(o.CreationTime AS DATE) AS [DateTime to Date],
     CAST('2025-08-20' AS DATE) AS [String to Date]
 FROM Sales.Orders o
+
+-- Date Calculation
