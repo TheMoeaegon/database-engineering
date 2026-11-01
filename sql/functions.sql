@@ -220,3 +220,35 @@ SELECT
 FROM Sales.Orders o
 
 -- Date Calculation
+
+-- DATEADD
+SELECT
+    o.OrderID ,
+    o.OrderDate ,
+    DATEADD(year, 2, o.OrderDate ) AS TwoYearsLater,
+    DATEADD(month, 3, o.OrderDate ) AS ThreeMonthLater,
+    DATEADD(day, -10, o.OrderDate ) AS BeforeTenDay
+FROM Sales.Orders o
+
+-- Calculate the age of employee
+SELECT
+    e.EmployeeID ,
+    e.BirthDate ,
+    DATEDIFF(year, e.BirthDate , GETDATE()) AS employee_age
+FROM Sales.Employees e;
+
+-- Find the average shipping duration in days for each month
+SELECT
+    MONTH(o.OrderDate) as order_date,
+    AVG(DATEDIFF(day, o.OrderDate , o.ShipDate )) AS avg_ship
+FROM Sales.Orders o
+GROUP BY MONTH(o.OrderDate )
+
+-- Time Gap Analysis
+-- Find the number of days between order and previous order
+SELECT
+    o.OrderID ,
+    o.OrderDate AS current_order_date,
+    LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ) AS Previous_order_date,
+    DATEDIFF(day, LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ), o.OrderDate ) As no_of_days
+FROM Sales.Orders o

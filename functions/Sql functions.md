@@ -631,3 +631,107 @@ FROM Sales.Orders o
 ###### **FORMAT VS CONVERT VS CAST**
 
 ![format-vs-convert-vs-cast](images/format-vs-convert-vs-cast.png)
+
+##### Calculation
+
+###### **DATEADD**
+
+\- Add or Subtracts a specific time interval to/from a date.
+
+![dateadd-function](images/dateadd-function.png)
+
+\- Syntax: DATEADD(part, interval, date)
+\- Example: DATEADD(year, 2, OrderDate) or DATEADD(month, -4, OrderDate)
+
+```sql
+-- DATEADD
+SELECT
+    o.OrderID ,
+    o.OrderDate ,
+    DATEADD(year, 2, o.OrderDate ) AS TwoYearsLater,
+    DATEADD(month, 3, o.OrderDate ) AS ThreeMonthLater,
+    DATEADD(day, -10, o.OrderDate ) AS BeforeTenDay
+FROM Sales.Orders o
+```
+
+| OrderID | OrderDate  | TwoYearsLater | ThreeMonthLater | BeforeTenDay |
+| ------- | ---------- | ------------- | --------------- | ------------ |
+| 1       | 2025-01-01 | 2027-01-01    | 2025-04-01      | 2024-12-22   |
+| 2       | 2025-01-05 | 2027-01-05    | 2025-04-05      | 2024-12-26   |
+| 3       | 2025-01-10 | 2027-01-10    | 2025-04-10      | 2024-12-31   |
+| 4       | 2025-01-20 | 2027-01-20    | 2025-04-20      | 2025-01-10   |
+| 5       | 2025-02-01 | 2027-02-01    | 2025-05-01      | 2025-01-22   |
+| 6       | 2025-02-05 | 2027-02-05    | 2025-05-05      | 2025-01-26   |
+| 7       | 2025-02-15 | 2027-02-15    | 2025-05-15      | 2025-02-05   |
+| 8       | 2025-02-18 | 2027-02-18    | 2025-05-18      | 2025-02-08   |
+| 9       | 2025-03-10 | 2027-03-10    | 2025-06-10      | 2025-02-28   |
+| 10      | 2025-03-15 | 2027-03-15    | 2025-06-15      | 2025-03-05   |
+
+###### **DATEDIFF**
+
+\- Find the difference between two date
+\- Syntax: DATEDIFF(part, start_date, end_date)
+
+**Task-1**
+
+```sql
+-- Calculate the age of employee
+SELECT
+    e.EmployeeID ,
+    e.BirthDate ,
+    DATEDIFF(year, e.BirthDate , GETDATE()) AS employee_age
+FROM Sales.Employees e;
+```
+
+| EmployeeID | BirthDate  | employee_age |
+| ---------- | ---------- | ------------ |
+| 1          | 1988-12-05 | 38           |
+| 2          | 1972-11-25 | 54           |
+| 3          | 1986-01-05 | 40           |
+| 4          | 1977-02-10 | 49           |
+| 5          | 1982-02-11 | 44           |
+
+**Task-2**
+
+```sql
+-- Find the average shipping duration in days for each month
+SELECT
+    MONTH(o.OrderDate) as order_date,
+    AVG(DATEDIFF(day, o.OrderDate , o.ShipDate )) AS avg_ship
+FROM Sales.Orders o
+GROUP BY MONTH(o.OrderDate )
+```
+
+| order_date | avg_ship |
+| ---------- | -------- |
+| 1          | 7        |
+| 2          | 7        |
+| 3          | 5        |
+
+**Task-3**
+
+> LAG Window function can be used to access value from the previous row
+
+```sql
+-- Time Gap Analysis
+-- Find the number of days between order and previous order
+SELECT
+    o.OrderID ,
+    o.OrderDate AS current_order_date,
+    LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ) AS Previous_order_date,
+    DATEDIFF(day, LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ), o.OrderDate ) As no_of_days
+FROM Sales.Orders o
+```
+
+| OrderID | current_order_date | Previous_order_date | no_of_days |
+| ------- | ------------------ | ------------------- | ---------- |
+| 1       | 2025-01-01         | NULL                | NULL       |
+| 2       | 2025-01-05         | 2025-01-01          | 4          |
+| 3       | 2025-01-10         | 2025-01-05          | 5          |
+| 4       | 2025-01-20         | 2025-01-10          | 10         |
+| 5       | 2025-02-01         | 2025-01-20          | 12         |
+| 6       | 2025-02-05         | 2025-02-01          | 4          |
+| 7       | 2025-02-15         | 2025-02-05          | 10         |
+| 8       | 2025-02-18         | 2025-02-15          | 3          |
+| 9       | 2025-03-10         | 2025-02-18          | 20         |
+| 10      | 2025-03-15         | 2025-03-10          | 5          |
