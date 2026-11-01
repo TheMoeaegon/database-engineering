@@ -17,9 +17,11 @@ We have data inside table and we can perform different operation on data like we
 \- Function use inside another function.
 ![nested-functions](images/nested-functions.png)
 
-### Types of SQL Functions (Single-Row / Row-Level Calculation)
+### Types of SQL Functions
 
 ![types-of-sql-functions](images/types-of-sql-functions.png)
+
+### Single-Row Functions (Row-Level Calculation)
 
 #### String Functions
 
@@ -455,7 +457,9 @@ WHERE MONTH(o.OrderDate ) = 2
 
 ![date-parts-all](images/date-parts-all.png)
 
-##### What is Date Format?
+##### Format & Casting
+
+###### What is Date Format?
 
 \- format specifier (how date is stored)
 ![date-format-parts](images/date-format-parts.png)
@@ -463,7 +467,7 @@ This whole is data format representation of this value. In world, there are diff
 
 ![date-format-standards](images/date-format-standards.png)
 
-##### Formatting
+###### **Formatting**
 
 Changing the format of a value from one to another. We are just changing how the value looks like.
 ![formatting-examples](images/formatting-examples.png)
@@ -560,7 +564,7 @@ GROUP BY FORMAT(o.OrderDate , 'MMM yy')
 
 ![all-format-number](images/all-format-number.png)
 
-##### Casting
+###### **Casting**
 
 Changing the data type from one to another
 
@@ -624,6 +628,6 @@ FROM Sales.Orders o
 | 2025-03-10 12:59:04.000 | 123           | 2025-03-10       | 2025-08-20     |
 | 2025-03-16 23:25:15.000 | 123           | 2025-03-16       | 2025-08-20     |
 
-##### FORMAT VS CONVERT VS CAST
+###### **FORMAT VS CONVERT VS CAST**
 
 ![format-vs-convert-vs-cast](images/format-vs-convert-vs-cast.png)
