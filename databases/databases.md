@@ -7,6 +7,7 @@
 A database is like a container — it is a kind of organized collection of data.
 
 **Why database?**
+
 - Organizes data in such a way that it is easier to access, manage, and search. This process is fast and efficient.
 - Can handle a large amount of data.
 - More secure to store data; controls who can access what.

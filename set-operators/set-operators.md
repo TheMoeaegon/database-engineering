@@ -56,6 +56,7 @@ FROM Sales.Customers c
 The order of queries in a UNION operation does not affect the result.
 
 **How SQL execute the UNION**
+
 ![union-execution](images/union-execution.png)
 
 #### UNION ALL
@@ -64,6 +65,7 @@ The order of queries in a UNION operation does not affect the result.
 \- Only set operator that doesn't remove duplicate and return result as it is.
 
 **UNION ALL VS UNION**
+
 - UNION ALL is generally faster than UNION because it doesn't have to extra step of removing duplicate. So, If you're confident there's no duplicate, use UNION ALL to get better performance.
 - Use UNION ALL to find duplicates and quality issues.
 
@@ -87,6 +89,7 @@ FROM Sales.Customers c
 ```
 
 **How SQL execute the UNION ALL**
+
 ![union-all-execution](images/union-all-execution.png)
 
 #### EXCEPT
@@ -116,6 +119,7 @@ FROM Sales.Customers c
 ```
 
 **How SQL execute the EXCEPT**
+
 ![except-execution](images/except-execution.png)
 It doesn't put any data from second query or set which is customer here. it only use for lookup.
 
@@ -143,6 +147,7 @@ FROM Sales.Customers c
 ```
 
 **How SQL execute the INTERSECT**
+
 ![intersect-execution](images/intersect-execution.png)
 
 ### Union Use Cases
@@ -152,14 +157,17 @@ FROM Sales.Customers c
 \- Combine similar information before analyzing the data
 
 **Example**
+
 ![union-use-case-before](images/union-use-case-before.png)
 If we want to combine information to generate report. we can do this way but we have too many single sql query and we may encounter inconsistent data in the report. Instead we can use set operators to combine the all these table data into one single table.
 
 **Example with set operators**
+
 ![union-use-case-set-operators](images/union-use-case-set-operators.png)
 Here we have one single big table and one sql query.
 
 **Example 2 with set operators**
+
 ![union-use-case-reporting](images/union-use-case-reporting.png)
 
 **Example**
@@ -215,6 +223,7 @@ ORDER BY OrderID;
 \- EXCEPT operator can be used to compare tables to detect discrepancies between databases.
 
 **Example**
+
 ![except-use-case-data-completeness](images/except-use-case-data-completeness.png)
 let's say we are doing data migration between two database. where we want to migrate table from database A to database B. now first we load the table from db A to db B , now to check if all the records move from table A to Table B we can use EXCEPT set operators to data completeness test.
 \- first test is we can use except to check if there is any record still in table of database A that is not in table of database B. the result should be empty which means all the records in database A table exits in table of database B.

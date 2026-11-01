@@ -38,6 +38,7 @@
 Each example is a complete SQL statement.
 
 **Common categories of SQL statements:**
+
 - **DQL (Data Query Language):** Retrieves data, primarily using `SELECT`.
 - **DML (Data Manipulation Language):** Modifies data using commands such as `INSERT`, `UPDATE`, and `DELETE`.
 - **DDL (Data Definition Language):** Defines or modifies database structures using commands such as `CREATE`, `ALTER`, and `DROP`.
@@ -59,6 +60,7 @@ Each example is a complete SQL statement.
 This query requests the names and ages of users who are at least 18 years old.
 
 **Query vs Statement:**
+
 - The terms *query* and *statement* are often used interchangeably, but their meanings are not always identical.
   - A **statement** is a complete SQL instruction.
   - A **query**, in its narrower sense, requests information from a database.
@@ -87,6 +89,7 @@ It contains the following clauses:
 | ORDER BY name    | Sorts the results by name.         |
 
 **Other commonly used clauses:**
+
 - **GROUP BY** — groups rows that share values.
 - **HAVING** — filters groups based on a condition.
 - **LIMIT** — restricts the number of returned rows in databases such as PostgreSQL and MySQL.

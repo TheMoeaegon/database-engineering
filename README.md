@@ -26,18 +26,18 @@ Each note has **Previous / Next** links at the top, so you can read straight thr
 
 ### Querying
 
-| Topic | What's inside |
-| --- | --- |
-| [Clauses](clauses/clauses.md) | SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, DISTINCT, TOP, ALIAS, execution order, static values |
-| [Filtering Data](filtering/filtering.md) | Operators, expressions, conditions, comparison / logical / range / membership / search operators |
+| Topic                                    | What's inside                                                                                         |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [Clauses](clauses/clauses.md)            | SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, DISTINCT, TOP, ALIAS, execution order, static values |
+| [Filtering Data](filtering/filtering.md) | Operators, expressions, conditions, comparison / logical / range / membership / search operators      |
 
 ### Combining Data
 
-| Topic | What's inside |
-| --- | --- |
-| [Combining Data](combining-data/combining-data.md) | Sets vs joins overview |
-| [Joins](joins/joins.md) | Why we join, basic joins (inner, left, right, full), advanced joins (anti joins, cross join), multi-table join |
-| [Set Operators](set-operators/set-operators.md) | UNION, UNION ALL, EXCEPT, INTERSECT and their rules |
+| Topic                                              | What's inside                                                                                                  |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [Combining Data](combining-data/combining-data.md) | Sets vs joins overview                                                                                         |
+| [Joins](joins/joins.md)                            | Why we join, basic joins (inner, left, right, full), advanced joins (anti joins, cross join), multi-table join |
+| [Set Operators](set-operators/set-operators.md)    | UNION, UNION ALL, EXCEPT, INTERSECT and their rules                                                            |
 
 ### Functions
 

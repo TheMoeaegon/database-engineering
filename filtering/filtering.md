@@ -15,12 +15,14 @@
 - Expressions do not run as standalone commands; instead, they are embedded within SQL statements — such as `SELECT`, `WHERE`, `HAVING`, and `ORDER BY` clauses — to manipulate, filter, or calculate data.
 
 **Definition of an Expression in SQL:**
+
 - An expression is any combination of values (literals), column references, functions, and operators that the database evaluates to produce a single value.
   - Examples of values: `5`, `'hello'`, `CURRENT_DATE`
   - Examples with operators: `2 + 3` (evaluates to 5), `price * 1.1`
   - Examples with functions: `UPPER(name)`, `COUNT(*)`
 
 **Are 2 and 3 > 2 Expressions?**
+
 - `2` is an expression: it is a literal value (specifically a numeric literal) that evaluates to 2.
 - `3 > 2` is an expression (specifically a Boolean expression): it combines two values (3 and 2) with a comparison operator (>). It evaluates to a Boolean value: TRUE.
 
@@ -32,6 +34,7 @@
 ![expression-and-condition](images/expression-and-condition.png)
 
 **Is a Comparison Condition Called a "Condition" or an "Expression"?**
+
 - It is both. In SQL terminology, a condition is just a specialized type of expression that evaluates to a Boolean value (`TRUE`, `FALSE`, or `UNKNOWN`).
   - **Expression perspective:** Anything that returns a value is an expression. Because a comparison like `3 > 2` returns TRUE or FALSE, it fits the formal definition of an expression.
   - **Condition perspective:** When you place that same logic inside a filtering clause (like `WHERE` or `HAVING`) to decide which rows to keep or discard, it functions as a condition.
@@ -71,9 +74,11 @@ The >= operator compares each user's age with 18. The WHERE clause uses the comp
 >Note: Use IN operator instead of OR for multiple values in the same columnt to simplify SQL.
 
 **Example 1**
+
 ![membership-operator-example-1](images/membership-operator-example-1.png)
 
 **Example 2**
+
 ![membership-operator-example-2](images/membership-operator-example-2.png)
 
 ### Search Operators

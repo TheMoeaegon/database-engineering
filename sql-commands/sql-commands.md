@@ -20,16 +20,17 @@
 
 Both are DDL commands and both remove data, but they remove different amounts of the table:
 
-| | TRUNCATE | DROP |
-| --- | --- | --- |
-| Removes | All rows | All rows + the table structure |
-| Table after | Still exists (empty) | No longer exists |
-| Columns, indexes, constraints | Kept | Removed with the table |
-| `WHERE` clause | Not allowed | Not applicable |
-| Identity column | Resets | Deleted with the table |
-| Use when | We want to empty the table but keep using it | We no longer need the table |
+|                               | TRUNCATE                                     | DROP                           |
+| ----------------------------- | -------------------------------------------- | ------------------------------ |
+| Removes                       | All rows                                     | All rows + the table structure |
+| Table after                   | Still exists (empty)                         | No longer exists               |
+| Columns, indexes, constraints | Kept                                         | Removed with the table         |
+| `WHERE` clause                | Not allowed                                  | Not applicable                 |
+| Identity column               | Resets                                       | Deleted with the table         |
+| Use when                      | We want to empty the table but keep using it | We no longer need the table    |
 
 **TRUNCATE:**
+
 - Removes all rows at once but keeps the table.
 - The columns, indexes, constraints, and table definition stay.
 - Resets the identity column.
@@ -37,12 +38,14 @@ Both are DDL commands and both remove data, but they remove different amounts of
 - Cannot be used when another table has a foreign key pointing to it (unless the constraint is dropped).
 
 **DROP:**
+
 - Removes the table completely — both the data and the table structure.
 - After `DROP`, the table no longer exists, so we cannot query or insert into it.
 - To use it again, we have to create the table again.
 - `DROP` also works on other objects like databases, views, and schemas.
 
 **When to use:**
+
 - Use `TRUNCATE` when we want to clear the table but keep it for later.
 - Use `DROP` when we are done with the table and want to remove it completely.
 
@@ -52,12 +55,15 @@ Both are DDL commands and both remove data, but they remove different amounts of
 - We have INSERT, UPDATE, and DELETE.
 
 **INSERT:**
+
 - We can insert data manually, where we type the whole command: `INSERT INTO ...`
 - Another way: insert with a SELECT statement.
 - To insert data into a table, we must have matching data type, constraints, and column count.
 
 **UPDATE:**
+
 - We can use an UPDATE statement to update the value of a single column or multiple columns.
 
 **DELETE:**
+
 - To remove data in a table we have DELETE and TRUNCATE.
