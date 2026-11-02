@@ -252,3 +252,27 @@ SELECT
     LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ) AS Previous_order_date,
     DATEDIFF(day, LAG(o.OrderDate ) OVER (ORDER BY o.OrderDate ), o.OrderDate ) As no_of_days
 FROM Sales.Orders o
+
+-- ISDATE
+SELECT
+    ISDATE('123') DateCheck1,
+    ISDATE('2025-08-20') DateCheck2,
+    ISDATE('20-08-2025') DateCheck3, -- isn't valid because it doesn't follow database standard
+    ISDATE('2025') DateCheck4,
+    ISDATE('08') DateCheck5
+
+-- we can use ISDATE to check data quality issue
+SELECT
+    --CAST(OrderDate AS DATE) OrderDate,
+    t.OrderDate,
+    ISDATE(t.OrderDate ) AS is_date,
+    CASE WHEN ISDATE(t.OrderDate) = 1 THEN CAST(OrderDate As Date)
+    ELSE '9999-01-01'
+    END NewOrderDate
+FROM (
+    SELECT '2025-08-20' AS OrderDate UNION
+    SELECT '2025-08-21' UNION
+    SELECT '2025-08-23' UNION
+    SELECT '2025-08'
+) t
+-- WHERE ISDATE(t.OrderDate ) = 0    --we can use to filter invalid date value form the result

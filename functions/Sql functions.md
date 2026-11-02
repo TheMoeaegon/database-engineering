@@ -735,3 +735,55 @@ FROM Sales.Orders o
 | 8       | 2025-02-18         | 2025-02-15          | 3          |
 | 9       | 2025-03-10         | 2025-02-18          | 20         |
 | 10      | 2025-03-15         | 2025-03-10          | 5          |
+
+##### Validation
+
+###### ISDATE
+
+\- Check if a value is a date.
+\- Return 1 if the string is a valid date. otherwise return 0
+\- Syntax: ISDATE(value)
+
+**Example-01**
+
+```sql
+SELECT
+    ISDATE('123') DateCheck1,
+    ISDATE('2025-08-20') DateCheck2,
+    ISDATE('20-08-2025') DateCheck3, -- isn't valid because it doesn't follow database standard
+    ISDATE('2025') DateCheck4,
+    ISDATE('08') DateCheck5
+
+```
+
+| DateCheck1 | DateCheck2 | DateCheck3 | DateCheck4 | DateCheck5 |
+| ---------- | ---------- | ---------- | ---------- | ---------- |
+| 0          | 1          | 0          | 1          | 0          |
+
+**Example-02**
+
+```sql
+-- we can use ISDATE to check data quality issue
+SELECT
+    --CAST(OrderDate AS DATE) OrderDate,
+    t.OrderDate,
+    ISDATE(t.OrderDate ) AS is_date,
+    CASE WHEN ISDATE(t.OrderDate) = 1 THEN CAST(OrderDate As Date)
+    ELSE '9999-01-01'
+    END NewOrderDate
+FROM (
+    SELECT '2025-08-20' AS OrderDate UNION
+    SELECT '2025-08-21' UNION
+    SELECT '2025-08-23' UNION
+    SELECT '2025-08'
+) t
+-- WHERE ISDATE(t.OrderDate ) = 0    --we can use to filter invalid date value form the result
+```
+
+| OrderDate  | is_date | NewOrderDate |
+| ---------- | ------- | ------------ |
+| 2025-08    | 0       | 9999-01-01   |
+| 2025-08-20 | 1       | 2025-08-20   |
+| 2025-08-21 | 1       | 2025-08-21   |
+| 2025-08-23 | 1       | 2025-08-23   |
+> So, We can use ISDATE function for date clean up.
