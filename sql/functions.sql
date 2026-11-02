@@ -276,3 +276,32 @@ FROM (
     SELECT '2025-08'
 ) t
 -- WHERE ISDATE(t.OrderDate ) = 0    --we can use to filter invalid date value form the result
+
+-- NULL Functions
+
+-- Find the average scores of the customers.
+SELECT
+    c.CustomerID ,
+    c.Score ,
+    COALESCE(c.Score, 0) AS score2,
+    AVG(c.Score) OVER() AS average_score2,
+    AVG(COALESCE(Score, 0)) OVER () AS average_score
+FROM Sales.Customers c ;
+
+-- Display the full name of the customer in a single field by merging their firstname and lastnames,
+-- and add 10 bonus points to each customer's score.
+SELECT
+    c.CustomerID ,
+    c.FirstName ,
+    c.LastName ,
+    c.FirstName  +  COALESCE(c.LastName, '') AS fullname,
+    c.Score ,
+    COALESCE(c.Score, 0) + 10 AS score_with_bonus_points
+FROM Sales.Customers c;
+
+-- Sort the customers from lowest to highest scores with NULL appearing at last.
+SELECT
+    c.CustomerID ,
+    c.Score
+FROM Sales.Customers c
+ORDER BY CASE WHEN c.Score IS NULL THEN 1 ELSE 0 END, c.score

@@ -786,4 +786,152 @@ FROM (
 | 2025-08-20 | 1       | 2025-08-20   |
 | 2025-08-21 | 1       | 2025-08-21   |
 | 2025-08-23 | 1       | 2025-08-23   |
+
 > So, We can use ISDATE function for date clean up.
+
+#### Null Functions
+
+###### **What is NULL?**
+
+- NULL means nothing, unknown!
+- NULL is not equal to anything!
+    - NULL is not zero
+    - NULL is not empty string
+    - NULL is not blank space
+- NULL tells us there is no value and it is missing
+
+![what-is-null](images/what-is-null.png)
+
+###### **ISNULL**
+
+\- Replace 'NULL' with a specified value
+\- Syntax: ISNULL(value, replacement_value); here value is column name
+\- Example: ISNULL(Shipping_Address, 'unknown')
+\- Here we are going to check Shipping_Address column and if we find the null value then we are going to replace that with default value 'unknown'. here we are replacing the null value with static value.
+
+![isnull-static-value](images/isnull-static-value.png)
+
+\- Example: ISNULL(Shipping_Address, Billing_Address)
+\- Here we are going to check the value of shipping address and if we find any null value then we are going to replace the null value from billing_address column. here we have both column value. and we are going to replace null with the help of another column
+
+![isnull-column-value](images/isnull-column-value.png)
+
+If we are going to replace null with using another column then we may end up with null if the replacement table value is also null. so if we don't want to end up with null in the result we can use static value to replace null.
+
+###### **COALESCE**
+
+\- Return the first non-null value from the list
+\- COALESCE(value1, value2, value3, ...)
+
+![coalesce-syntax](images/coalesce-syntax.png)
+
+**How COALESCE works?**
+
+![coalesce-how-it-works](images/coalesce-how-it-works.png)
+
+###### **NULL VS COALESCE**
+
+![null-vs-coalesce](images/null-vs-coalesce.png)
+
+> Try to use COALESCE as much as possible until you have slow query performance.
+
+###### **Use Case: Handling NULLS**
+
+**Data Aggregation**
+
+\- we can use ISNULL or COALESCE to handle the null before doing data aggregations.
+
+![aggregate-functions-ignore-null](images/aggregate-functions-ignore-null.png)
+
+If we try to calculate avg or min or max then we can get misleading result because we want to treat null as 0 but aggregate function ignore null except COUNT. so we can replace null with 0 using ISNULL or COALESCE to get accurate results.
+
+![aggregate-functions-null-as-zero](images/aggregate-functions-null-as-zero.png)
+
+```sql
+-- Find the average scores of the customers.
+SELECT
+    c.CustomerID ,
+    c.Score ,
+    COALESCE(c.Score, 0) AS score2,
+    AVG(c.Score) OVER() AS average_score2,
+    AVG(COALESCE(Score, 0)) OVER () AS average_score
+FROM Sales.Customers c ;
+```
+
+| CustomerID | Score | score2 | average_score2 | average_score |
+| ---------- | ----- | ------ | -------------- | ------------- |
+| 1          | 350   | 350    | 625            | 500           |
+| 2          | 900   | 900    | 625            | 500           |
+| 3          | 750   | 750    | 625            | 500           |
+| 4          | 500   | 500    | 625            | 500           |
+| 5          | NULL  | 0      | 625            | 500           |
+
+> The primary difference between AVG() and AVG() OVER() lies in how they process rows and shape the final query output:
+>
+> - AVG() (Aggregate Function): Combines multiple rows into a single summary row per group (when used with GROUP BY), reducing the total number of rows returned in the result set.
+> - AVG() OVER() (Window Function): Calculates the average across a set of related rows while retaining all original row-level details
+
+**Mathematical Operations**
+
+\- handle the null before doing mathematical operations.
+\- we get NULL + 5 = NULL and NULL + 'B' = NULL. Adding anything to null we get result as a null.
+
+```sql
+-- Display the full name of the customer in a single field by merging their firstname and lastnames,
+-- and add 10 bonus points to each customer's score.
+SELECT
+    c.CustomerID ,
+    c.FirstName ,
+    c.LastName ,
+    c.FirstName  +  COALESCE(c.LastName, '') AS fullname,
+    c.Score ,
+    COALESCE(c.Score, 0) + 10 AS score_with_bonus_points
+FROM Sales.Customers c
+```
+
+| CustomerID | FirstName | LastName | fullname       | Score | score_with_bonus_points |
+| ---------- | --------- | -------- | -------------- | ----- | ----------------------- |
+| 1          | Jossef    | Goldberg | JossefGoldberg | 350   | 360                     |
+| 2          | Kevin     | Brown    | KevinBrown     | 900   | 910                     |
+| 3          | Mary      | NULL     | Mary           | 750   | 760                     |
+| 4          | Mark      | Schwarz  | MarkSchwarz    | 500   | 510                     |
+| 5          | Anna      | Adams    | AnnaAdams      | NULL  | 10                      |
+
+**JOINS**
+
+\- Handle the NULL before JOINING TABLES
+
+**Example**
+
+![join-null-loses-records](images/join-null-loses-records.png)
+
+We are going to lose record in the output if have null inside our key. So, it is important to handle NULL inside the key before doing joins. So, we are going to handle the null by replacing it with empty string before doing joins.
+
+**Solution**
+
+![join-null-handled-with-isnull](images/join-null-handled-with-isnull.png)
+
+So, to get complete result without losing any records when joining the table we can use ISNULL function to check key.
+
+**Sorting Data**
+
+\- Handle the NULL before sorting the data.
+
+**Example**
+
+```sql
+-- Sort the customers from lowest to highest scores with NULL appearing at last.
+SELECT
+    c.CustomerID ,
+    c.Score
+FROM Sales.Customers c
+ORDER BY CASE WHEN c.Score IS NULL THEN 1 ELSE 0 END, c.score
+```
+
+| CustomerID | Score |
+| ---------- | ----- |
+| 1          | 350   |
+| 4          | 500   |
+| 3          | 750   |
+| 2          | 900   |
+| 5          | NULL  |
