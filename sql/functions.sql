@@ -200,7 +200,7 @@ FROM Sales.Orders o
 SELECT
     FORMAT(o.OrderDate , 'MMM yy') as Order_Date,
     COUNT(*) as no_of_order
-FROM sales.Orders o
+FROM Sales.Orders o
 GROUP BY FORMAT(o.OrderDate , 'MMM yy')
 
  -- CONVERT
@@ -305,3 +305,36 @@ SELECT
     c.Score
 FROM Sales.Customers c
 ORDER BY CASE WHEN c.Score IS NULL THEN 1 ELSE 0 END, c.score
+
+-- NULLIF
+-- Find the sale price for each order by dividing the sales by the equity
+SELECT
+    o.OrderId ,
+    o.Sales ,
+    o.Quantity ,
+    o.Sales / NULLIF(o.Quantity, 0) AS Price
+FROM Sales.Orders o ;
+
+-- IS NULL
+-- Identify the customers who have no score.
+SELECT
+    *
+FROM Sales.Customers c
+WHERE c.Score IS NULL;
+
+-- List all customers who have scores
+SELECT
+    *
+FROM Sales.Customers c
+WHERE c.Score IS NOT NULL;
+
+-- List all details for customers who have not placed any orders
+SELECT
+    c.CustomerID ,
+    c.FirstName ,
+    o.OrderID ,
+    o.OrderDate
+FROM Sales.Customers c
+LEFT JOIN Sales.Orders o
+    ON c.CustomerID = o.CustomerID
+WHERE o.CustomerID IS NULL

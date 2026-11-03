@@ -43,6 +43,7 @@
 ### Comparison Operators
 
 \- These compare two values and produce a comparison result.
+
 ![comparison-operators](images/comparison-operators.png)
 
 ```sql
@@ -71,6 +72,7 @@ The >= operator compares each user's age with 18. The WHERE clause uses the comp
 \- How IN and NOT IN  filter the row. If the column value is in the list we provided then it will include that row in the results
 
 ![membership-operator](images/membership-operator.png)
+
 >Note: Use IN operator instead of OR for multiple values in the same columnt to simplify SQL.
 
 **Example 1**

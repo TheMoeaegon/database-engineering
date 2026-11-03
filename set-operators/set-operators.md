@@ -11,6 +11,7 @@
 1) SQL Clauses
     - SET Operators can be used almost in all clauses WHERE | JOIN | GROUP BY | HAVING
     - ORDER BY is allowed only once at the end of the query
+
     ![set-operator-clauses](images/set-operator-clauses.png)
 
 2) Number of columns
@@ -33,9 +34,11 @@
 
 \- Returns all distinct rows from both queries.
 \- Removes duplicate rows from the result
+
 ![union-distinct](images/union-distinct.png)
 
 Since we have mary and kevin in both set so union will return only one in the result.
+
 ![union-result](images/union-result.png)
 
 **Example**
@@ -151,14 +154,17 @@ FROM Sales.Customers c
 **How SQL execute the EXCEPT**
 
 ![except-execution](images/except-execution.png)
+
 It doesn't put any data from second query or set which is customer here. it only use for lookup.
 
 ![except-order-result](images/except-order-result.png)
+
 The order of query is important because we get different result if order is different.
 
 #### INTERSECT
 
 \- Returns only the rows that are common in both queries.
+
 ![intersect-result](images/intersect-result.png)
 
 **Example**
@@ -194,11 +200,13 @@ FROM Sales.Customers c
 **Example**
 
 ![union-use-case-before](images/union-use-case-before.png)
+
 If we want to combine information to generate report. we can do this way but we have too many single sql query and we may encounter inconsistent data in the report. Instead we can use set operators to combine the all these table data into one single table.
 
 **Example with set operators**
 
 ![union-use-case-set-operators](images/union-use-case-set-operators.png)
+
 Here we have one single big table and one sql query.
 
 **Example 2 with set operators**
@@ -283,6 +291,7 @@ ORDER BY OrderID;
 **Example**
 
 ![except-use-case-data-completeness](images/except-use-case-data-completeness.png)
+
 let's say we are doing data migration between two database. where we want to migrate table from database A to database B. now first we load the table from db A to db B , now to check if all the records move from table A to Table B we can use EXCEPT set operators to data completeness test.
 \- first test is we can use except to check if there is any record still in table of database A that is not in table of database B. the result should be empty which means all the records in database A table exits in table of database B.
 \- another test is we can use expect to find any row that is in table of database B that is not in table of database A because both table in database A and B must be identical.

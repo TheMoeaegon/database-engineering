@@ -41,9 +41,9 @@ Each note has **Previous / Next** links at the top, so you can read straight thr
 
 ### Functions
 
-| Topic                                         | What's inside                                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| [SQL Functions](functions/Sql%20functions.md) | What functions are, nested functions, single-row functions: string, number, and date & time |
+| Topic                                         | What's inside                                                                                               |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [SQL Functions](functions/Sql%20functions.md) | What functions are, nested functions, single-row functions: string, number, date & time, and NULL functions |
 
 ### Practice
 

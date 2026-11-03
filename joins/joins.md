@@ -5,11 +5,13 @@
 ### Why We Join Tables?
 
 1) **Recombining data**
+
    ![joins-recombining-data](images/joins-recombining-data.png)
 
    lets say we have customer data splits in multiple table and then later we want all the data of customer in a result then we can connect all the table together using sql joins which allow us query to combine all the table in one big results.
 
 2) **Data Enrichment**
+
    ![joins-data-enrichment](images/joins-data-enrichment.png)
 
    we can use sql join to get extra info in result. if we have customer table as master table and we want information from another table like zip codes or help from another table which we called reference table or lookup table where we would like to add one extra infromation to master table. now we can join these to table to enhance our result.
@@ -241,6 +243,7 @@ CROSS JOIN orders o;
 ```
 
 \- Output of Cross JOIN
+
 ![cross-join-output](images/cross-join-output.png)
 
 #### How To Choose Between Join Types?
@@ -254,7 +257,9 @@ CROSS JOIN orders o;
 when doing analysis, the author starts with main table and if he need extra information he then left join other table one by one and see the results and at last use where clause to control what to keep. he could have use inner join but use left join with where clause because he get more flexibility on whether he want matching, unmatching data.
 
 \- **Visualizing the flow**
+
 ![multi-table-join-flow](images/multi-table-join-flow.png)
+
 We get all data from A and then only matching data from B. then we left join C and we get only matching data from C. and how many other table we join we only get matching data.
 
 **Example**

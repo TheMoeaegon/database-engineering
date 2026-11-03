@@ -1,10 +1,11 @@
-## SQL functions
+## SQL Functions
 
 ← Previous: [Set Operators](../set-operators/set-operators.md) | [Index](../README.md) | Next → [Practice (sql/)](../sql)
 
 We have data inside table and we can perform different operation on data like we can change the value of the data like doing data manipulation, data analysis to generate report or find insights, data cleaning or data transformation in order to solve some sql task. and in sql to solve this task we have functions.
 
-**What is functions?
+**What is functions?**
+
 \- A Built in SQL code:
 - accept an input value
 - process it
@@ -15,13 +16,30 @@ We have data inside table and we can perform different operation on data like we
 **Nested Functions**
 
 \- Function use inside another function.
+
 ![nested-functions](images/nested-functions.png)
 
 ### Types of SQL Functions
 
 ![types-of-sql-functions](images/types-of-sql-functions.png)
 
+SQL functions are grouped into single-row functions and aggregate functions.
+
+### Topics
+
+- [Single-Row Functions](#single-row-functions-row-level-calculation) — run on each row and return one value per row.
+- Aggregate Functions — summarize many rows into a single value.
+
 ### Single-Row Functions (Row-Level Calculation)
+
+Single-row functions work on one row at a time.
+
+#### Topics
+
+- [String Functions](#string-functions)
+- [Number Functions](#number-functions)
+- [Date & Time Functions](#date--time-functions)
+- [Null Functions](#null-functions)
 
 #### String Functions
 
@@ -84,6 +102,7 @@ WHERE c.first_name <> TRIM(c.first_name);
 
 \- Replace specific character with a new character
 \- It not only replace but can be used to remove the value.
+
 ![replace-function](images/replace-function.png)
 
 **Example**
@@ -106,6 +125,7 @@ SELECT
 
 \- Count how many characters
 \- Can be used with number, character and date
+
 ![len-function](images/len-function.png)
 
 **Example**
@@ -195,6 +215,7 @@ SELECT
 **Manipulation Date**
 
 ![date-manipulation](images/date-manipulation.png)
+
 We can use different operation to manipulate date. we can manipulate the date value by extracting some part of date, or change the format of the date, or we can use to calculate the difference between two date and lastly we can validate the given date which result in 0 (false) if date is invalid and 1 if the date is in valid format.
 
 **Different Date and Time Functions**
@@ -462,7 +483,9 @@ WHERE MONTH(o.OrderDate ) = 2
 ###### What is Date Format?
 
 \- format specifier (how date is stored)
+
 ![date-format-parts](images/date-format-parts.png)
+
 This whole is data format representation of this value. In world, there are different ways to represent a date.
 
 ![date-format-standards](images/date-format-standards.png)
@@ -470,6 +493,7 @@ This whole is data format representation of this value. In world, there are diff
 ###### **Formatting**
 
 Changing the format of a value from one to another. We are just changing how the value looks like.
+
 ![formatting-examples](images/formatting-examples.png)
 
 ###### **FORMAT**
@@ -632,7 +656,7 @@ FROM Sales.Orders o
 
 ![format-vs-convert-vs-cast](images/format-vs-convert-vs-cast.png)
 
-##### Calculation
+##### Date Calculation
 
 ###### **DATEADD**
 
@@ -799,6 +823,7 @@ FROM (
     - NULL is not empty string
     - NULL is not blank space
 - NULL tells us there is no value and it is missing
+- NULL is not a data type in SQL, it is just a special marker, placeholder or state which indicates that a data does not exist in a database.
 
 ![what-is-null](images/what-is-null.png)
 
@@ -834,6 +859,168 @@ If we are going to replace null with using another column then we may end up wit
 ![null-vs-coalesce](images/null-vs-coalesce.png)
 
 > Try to use COALESCE as much as possible until you have slow query performance.
+
+###### **NULLIF**
+
+\- Compare two expressions return:
+- NULL, if they are equal.
+- First Value, if they are not equal.
+\- Syntax: NULLIF(value1, value2)
+\- Example: NULLIF(Shipping_Address, 'unknown')
+\- Example: NULLIF(Shipping_Address, Billing_Address)
+
+**Example-1**
+
+![nullif-invalid-price](images/nullif-invalid-price.png)
+
+In this example we are checking if there is any invalid price. so we are replacing invalid price with null value.
+
+**Example-2**
+
+![nullif-inconsistent-data](images/nullif-inconsistent-data.png)
+
+We can use NULLIF to check for inconsistent data.
+
+**NULLIF Use Case: Division By Zero**
+
+\- preventing the error of dividing by zero
+
+**Example-3**
+
+```sql
+-- Find the sale price for each order by dividing the sales by the equity
+SELECT
+    o.OrderId ,
+    o.Sales ,
+    o.Quantity ,
+    o.Sales / NULLIF(o.Quantity, 0) AS Price
+FROM Sales.Orders o ;
+```
+
+| OrderId | Sales | Quantity | Price |
+| ------- | ----- | -------- | ----- |
+| 1       | 10    | 1        | 10    |
+| 2       | 15    | 1        | 15    |
+| 3       | 20    | 2        | 10    |
+| 4       | 60    | 2        | 30    |
+| 5       | 25    | 1        | 25    |
+| 6       | 50    | 2        | 25    |
+| 7       | 30    | 2        | 15    |
+| 8       | 90    | 3        | 30    |
+| 9       | 20    | 2        | 10    |
+| 10      | 60    | 0        | NULL  |
+
+###### **IS NULL & IS NOT NULL**
+
+**IS NULL**
+
+\- Return TRUE if the value is NULL otherwise return FALSE
+\- Syntax: Value IS NULL
+\- Example: Shipping_Address IS NULL
+
+**IS NOT NULL**
+
+\- Return TRUE if the value IS NOT NULL, otherwise it return FALSE.
+\- Syntax: Value IS NOT NULL
+\- Example: Shipping_Address IS NOT NULL
+
+**IS NULL Use Case**
+
+**#1 Filtering Data**
+
+\- Searching for missing information or searching for null.
+
+**Example-1**
+
+```sql
+-- Identify the customers who have no score.
+SELECT
+    *
+FROM Sales.Customers c
+WHERE c.Score IS NULL;
+```
+
+| CustomerID | FirstName | LastName | Country | Score |
+| ---------- | --------- | -------- | ------- | ----- |
+| 5          | Anna      | Adams    | USA     | NULL  |
+
+**Example-2**
+
+```sql
+-- List all customers who have scores
+SELECT
+    *
+FROM Sales.Customers c
+WHERE c.Score IS NOT NULL;
+```
+
+| CustomerID | FirstName | LastName | Country | Score |
+| ---------- | --------- | -------- | ------- | ----- |
+| 1          | Jossef    | Goldberg | Germany | 350   |
+| 2          | Kevin     | Brown    | USA     | 900   |
+| 3          | Mary      | NULL     | USA     | 750   |
+| 4          | Mark      | Schwarz  | Germany | 500   |
+
+**#2 Anti Joins**
+
+\- Finding the unmatched rows between two tables.
+
+```sql
+-- List all details for customers who have not placed any orders
+SELECT
+    c.CustomerID ,
+    c.FirstName ,
+    o.OrderID ,
+    o.OrderDate
+FROM Sales.Customers c
+LEFT JOIN Sales.Orders o
+    ON c.CustomerID = o.CustomerID
+WHERE o.CustomerID IS NULL
+```
+
+| CustomerID | FirstName | OrderID | OrderDate |
+| ---------- | --------- | ------- | --------- |
+| 5          | Anna      | NULL    | NULL      |
+
+###### **NULL vs Empty vs Space**
+
+**NULL**
+
+\- Null means nothing, unknown!
+
+**Empty**
+
+\- String value which has zero characters
+
+**Space**
+
+\- Space value has one or more space characters.
+
+![null-vs-empty-vs-space](images/null-vs-empty-vs-space.png)
+
+###### **Handling NULLS**
+
+**Data Policies**
+
+\- Set of rules that defines how data should be handled.
+
+**#1 Data Policy**
+
+- only use NULLs and empty strings, but avoid using blank spaces.
+
+**#2 Data Policy**
+
+- only use NULLs and avoid using empty strings and blank spaces.
+- Use Case: Replacing empty string and blanks with NULL during data preparation before inserting into database to optimize storage and performance.
+
+**#3 Data Policy**
+
+- Use the default value 'unknown' and avoid using NULLs, empty strings and blank spaces.
+- Use Case: Replacing empty string, NULL and blanks with default value during data preparation before using it in reporting to improve readiblity and reduce confusion.
+
+**Example**
+
+![data-policy-example](images/data-policy-example.png)
 
 ###### **Use Case: Handling NULLS**
 
@@ -935,3 +1122,7 @@ ORDER BY CASE WHEN c.Score IS NULL THEN 1 ELSE 0 END, c.score
 | 3          | 750   |
 | 2          | 900   |
 | 5          | NULL  |
+
+###### **Null Functions: Summary**
+
+![null-functions-summary](images/null-functions-summary.png)
