@@ -1,216 +1,6 @@
-## SQL Functions
+## Date & Time Functions
 
-← Previous: [Set Operators](../set-operators/set-operators.md) | [Index](../README.md) | Next → [Practice (sql/)](../sql)
-
-We have data inside table and we can perform different operation on data like we can change the value of the data like doing data manipulation, data analysis to generate report or find insights, data cleaning or data transformation in order to solve some sql task. and in sql to solve this task we have functions.
-
-**What is functions?**
-
-\- A Built in SQL code:
-- accept an input value
-- process it
-- returns an output value
-
-![what-is-a-function](images/what-is-a-function.png)
-
-**Nested Functions**
-
-\- Function use inside another function.
-
-![nested-functions](images/nested-functions.png)
-
-### Types of SQL Functions
-
-![types-of-sql-functions](images/types-of-sql-functions.png)
-
-SQL functions are grouped into single-row functions and aggregate functions.
-
-### Topics
-
-- [Single-Row Functions](#single-row-functions-row-level-calculation) — run on each row and return one value per row.
-- Aggregate Functions — summarize many rows into a single value.
-
-### Single-Row Functions (Row-Level Calculation)
-
-Single-row functions work on one row at a time.
-
-#### Topics
-
-- [String Functions](#string-functions)
-- [Number Functions](#number-functions)
-- [Date & Time Functions](#date--time-functions)
-- [Null Functions](#null-functions)
-
-#### String Functions
-
-![string-functions](images/string-functions.png)
-
-##### Manipulation
-
-###### **CONCAT**
-
-\- Combine multiple string into one.
-
-**Example**
-
-```sql
--- Concatenate first name and country into one column
-SELECT
-    c.first_name,
-    c.country,
-    CONCAT(c.first_name , '-' ,c.country ) AS name_country
-FROM customers c;
-```
-
-###### **LOWER & UPPER**
-
-**Example**
-
-```sql
--- convert the customer first name to lowercase
-SELECT
-    c.first_name,
-    LOWER(c.first_name) AS low_name
-FROM customers c ;
-
--- conver the customer first name to uppercase
-SELECT
-    c.first_name,
-    UPPER(c.first_name )
-FROM customers c ;
-```
-
-###### **TRIM**
-
-\- Remove Leading and Trailing spaces.
-
-**Example**
-
-```sql
--- find customers whose first name contains leading or trailing spaces
-SELECT
-    c.first_name,
-    LEN(c.first_name) AS len_name,
-    LEN(TRIM(c.first_name)) AS len_trim_name,
-    LEN(c.first_name) - LEN(TRIM(c.first_name )) AS flag
-FROM customers c
---WHERE LEN(c.first_name) <> LEN(TRIM(c.first_name ))
-WHERE c.first_name <> TRIM(c.first_name);
-```
-
-###### **REPLACE**
-
-\- Replace specific character with a new character
-\- It not only replace but can be used to remove the value.
-
-![replace-function](images/replace-function.png)
-
-**Example**
-
-```sql
--- Remove dashes (-) from a phone number
-SELECT
-    '123-246-464' AS phone_number,
-    REPLACE('123-246-464', '-', '/') AS clean_phone
-
--- Replace File Extension from txt to csv
-SELECT
-    'reports.txt' AS old_filename,
-    REPLACE('reports.txt', '.txt', '.csv')
-```
-
-##### Calculation
-
-###### **LEN**
-
-\- Count how many characters
-\- Can be used with number, character and date
-
-![len-function](images/len-function.png)
-
-**Example**
-
-```sql
--- Calcualte the length of each customers first name
-SELECT
-    c.first_name,
-    LEN(c.first_name) AS len_name
-FROM customers c
-```
-
-##### String Extraction
-
-###### **LEFT**
-
-\- Extract specific number of characters from the start
-\- Syntax: LEFT(value,  length)
-
-###### **RIGHT**
-
-\- Extract specific number of characters from the end
-\- Syntax: RIGHT(value,  length)
-
-**Example**
-
-```sql
--- Retrieve the first two characters of each first name
-SELECT
-    c.first_name,
-    LEFT(TRIM(c.first_name), 2) AS first_two_char
-FROM customers c
-
--- Retrieve the last two characters of each first name
-SELECT
-    c.first_name,
-    RIGHT(c.first_name , 2) AS last_two_char
-FROM customers c
-```
-
-###### **SUBSTRING**
-
-\- Extract a part of a string at a specified position
-\- Syntax: SUBSTRING(value, start, length)
-
-**Example**
-
-```sql
--- Retrieve a list of customer's first name removing the first character
-SELECT
-    c.first_name,
-    SUBSTRING(TRIM(c.first_name), 2, LEN(c.first_name)) AS sub_name
-FROM customers c
-```
-
-#### Number Functions
-
-###### **ROUND**
-
-![round-function](images/round-function.png)
-
-**Example**
-
-```sql
-SELECT
-    3.516,
-    ROUND(3.516, 2) AS round_2,
-    ROUND(3.516, 1) AS round_1,
-    ROUND(3.516, 0) AS round_0
-```
-
-###### **ABS**
-
-\- Convert negative number to positive
-
-**Example**
-
-```sql
-SELECT
-    -10,
-    ABS(-10),
-    ABS(10)
-```
-
-#### Date & Time Functions
+← Previous: [Number Functions](number-functions.md) | [Index](../README.md) | Next → [Null Functions](null-functions.md)
 
 **Manipulation Date**
 
@@ -222,24 +12,24 @@ We can use different operation to manipulate date. we can manipulate the date va
 
 ![date-time-functions](images/date-time-functions.png)
 
-###### **GETDATE**
+#### **GETDATE**
 
 \- We can use GETDATE function to get date value. it is one of 3 ways to get date value in sql. first way is to get from column value with date type, second is static value and last way is to use GETDATE function.
 \- return the current date and time at the moment when the query is executed.
 
-##### Part Extraction
+### Part Extraction
 
-###### **DAY**
+#### **DAY**
 
 \- Return the day from Date
 \- Syntax: DAY(date)
 
-###### **MONTH**
+#### **MONTH**
 
 \- Return the month from Date
 \- Syntax: MONTH(date)
 
-###### **YEAR**
+#### **YEAR**
 
 \- Return the year from Date
 \- Syntax: YEAR(date)
@@ -255,7 +45,7 @@ SELECT
 FROM Sales.Orders o
 ```
 
-###### **DATEPART**
+#### **DATEPART**
 
 \- Return specific part of a date as a number like week, or quater.
 \- Syntax: DATEPART(part, date)
@@ -290,7 +80,7 @@ FROM Sales.Orders o
 | 9       | 2025-03-10 12:59:04.000 | 2025    | 3        | 10     | 12   | 1         | 11      |
 | 10      | 2025-03-16 23:25:15.000 | 2025    | 3        | 16     | 23   | 1         | 12      |
 
-###### **DATENAME**
+#### **DATENAME**
 
 \- Returns the name of a specific part of a date
 \- The return value of this function is string.
@@ -330,7 +120,7 @@ FROM Sales.Orders o
 Here DATENAME(day, date) and DATENAME(year, date) return number of string type which is different from DATEPART() function which return number of int type.
 So, most important part of DATENAME() function is to provide more human readable information to users.
 
-###### **DATETRUNC**
+#### **DATETRUNC**
 
 \- Truncates the date to the specific part
 \- Syntax: DATETRUNC(part, date) -> return date or datetime
@@ -389,7 +179,7 @@ GROUP BY DATETRUNC(month, o.CreationTime)
 | 2025-02-01 00:00:00.000 | 4           |
 | 2025-03-01 00:00:00.000 | 2           |
 
-###### **EOMONTH**
+#### **EOMONTH**
 
 \- Returns last day of a month
 \- Syntax: EOMONTH(date)
@@ -419,7 +209,7 @@ SELECT
 
 > we use CAST function to change the data type to date. datetrunc return datetime type
 
-###### Part Extraction Use Case
+#### Part Extraction Use Case
 
 \- **Data Aggregation and Reporting**
 
@@ -466,7 +256,7 @@ WHERE MONTH(o.OrderDate ) = 2
 
  > Best Practice: Filtering Data using an Integer is faster than using a String. Avoid using DATENAME for filtering data, instead used DATEPART
 
-###### **Function Comparision**
+#### **Function Comparision**
 
 ![function-comparison](images/function-comparison.png)
 
@@ -474,13 +264,13 @@ WHERE MONTH(o.OrderDate ) = 2
 
 ![choose-date-function](images/choose-date-function.png)
 
-###### All Parts
+#### All Parts
 
 ![date-parts-all](images/date-parts-all.png)
 
-##### Format & Casting
+### Format & Casting
 
-###### What is Date Format?
+#### What is Date Format?
 
 \- format specifier (how date is stored)
 
@@ -490,13 +280,13 @@ This whole is data format representation of this value. In world, there are diff
 
 ![date-format-standards](images/date-format-standards.png)
 
-###### **Formatting**
+#### **Formatting**
 
 Changing the format of a value from one to another. We are just changing how the value looks like.
 
 ![formatting-examples](images/formatting-examples.png)
 
-###### **FORMAT**
+#### **FORMAT**
 
 \- Format a date or time value
 \- Format(value, format [, culture]), culture is optional
@@ -556,7 +346,7 @@ FROM Sales.Orders o
 | 2025-03-10 12:59:04.000 | Day Mon Mar Q1 2025 12:59:04 PM |
 | 2025-03-16 23:25:15.000 | Day Sun Mar Q1 2025 11:25:15 PM |
 
-###### **Formatting Use Case**
+#### **Formatting Use Case**
 
 **Data Aggregation**
 
@@ -578,7 +368,7 @@ GROUP BY FORMAT(o.OrderDate , 'MMM yy')
 
 ![data-standardization](images/data-standardization.png)
 
-###### All Format
+#### All Format
 
 **Date Format**
 
@@ -588,11 +378,11 @@ GROUP BY FORMAT(o.OrderDate , 'MMM yy')
 
 ![all-format-number](images/all-format-number.png)
 
-###### **Casting**
+#### **Casting**
 
 Changing the data type from one to another
 
-###### **CONVERT**
+#### **CONVERT**
 
 \- Convert a date or time value to a different data type(CASTING) & Fomrat the value(FORMATTING)
 \- Syntax: CONVERT(data_type, value, [, style ]) where third parameter is optional
@@ -623,7 +413,7 @@ FROM Sales.Orders o
 
 ![convert-style-table](images/convert-style-table.png)
 
-###### **CAST**
+#### **CAST**
 
 \- Convert a value to specific data type.
 \- Syntax: CAST(value as DATA_TYPE)
@@ -652,13 +442,13 @@ FROM Sales.Orders o
 | 2025-03-10 12:59:04.000 | 123           | 2025-03-10       | 2025-08-20     |
 | 2025-03-16 23:25:15.000 | 123           | 2025-03-16       | 2025-08-20     |
 
-###### **FORMAT VS CONVERT VS CAST**
+#### **FORMAT VS CONVERT VS CAST**
 
 ![format-vs-convert-vs-cast](images/format-vs-convert-vs-cast.png)
 
-##### Date Calculation
+### Date Calculation
 
-###### **DATEADD**
+#### **DATEADD**
 
 \- Add or Subtracts a specific time interval to/from a date.
 
@@ -691,7 +481,7 @@ FROM Sales.Orders o
 | 9       | 2025-03-10 | 2027-03-10    | 2025-06-10      | 2025-02-28   |
 | 10      | 2025-03-15 | 2027-03-15    | 2025-06-15      | 2025-03-05   |
 
-###### **DATEDIFF**
+#### **DATEDIFF**
 
 \- Find the difference between two date
 \- Syntax: DATEDIFF(part, start_date, end_date)
@@ -760,9 +550,9 @@ FROM Sales.Orders o
 | 9       | 2025-03-10         | 2025-02-18          | 20         |
 | 10      | 2025-03-15         | 2025-03-10          | 5          |
 
-##### Validation
+### Validation
 
-###### ISDATE
+#### ISDATE
 
 \- Check if a value is a date.
 \- Return 1 if the string is a valid date. otherwise return 0
@@ -812,317 +602,3 @@ FROM (
 | 2025-08-23 | 1       | 2025-08-23   |
 
 > So, We can use ISDATE function for date clean up.
-
-#### Null Functions
-
-###### **What is NULL?**
-
-- NULL means nothing, unknown!
-- NULL is not equal to anything!
-    - NULL is not zero
-    - NULL is not empty string
-    - NULL is not blank space
-- NULL tells us there is no value and it is missing
-- NULL is not a data type in SQL, it is just a special marker, placeholder or state which indicates that a data does not exist in a database.
-
-![what-is-null](images/what-is-null.png)
-
-###### **ISNULL**
-
-\- Replace 'NULL' with a specified value
-\- Syntax: ISNULL(value, replacement_value); here value is column name
-\- Example: ISNULL(Shipping_Address, 'unknown')
-\- Here we are going to check Shipping_Address column and if we find the null value then we are going to replace that with default value 'unknown'. here we are replacing the null value with static value.
-
-![isnull-static-value](images/isnull-static-value.png)
-
-\- Example: ISNULL(Shipping_Address, Billing_Address)
-\- Here we are going to check the value of shipping address and if we find any null value then we are going to replace the null value from billing_address column. here we have both column value. and we are going to replace null with the help of another column
-
-![isnull-column-value](images/isnull-column-value.png)
-
-If we are going to replace null with using another column then we may end up with null if the replacement table value is also null. so if we don't want to end up with null in the result we can use static value to replace null.
-
-###### **COALESCE**
-
-\- Return the first non-null value from the list
-\- COALESCE(value1, value2, value3, ...)
-
-![coalesce-syntax](images/coalesce-syntax.png)
-
-**How COALESCE works?**
-
-![coalesce-how-it-works](images/coalesce-how-it-works.png)
-
-###### **NULL VS COALESCE**
-
-![null-vs-coalesce](images/null-vs-coalesce.png)
-
-> Try to use COALESCE as much as possible until you have slow query performance.
-
-###### **NULLIF**
-
-\- Compare two expressions return:
-- NULL, if they are equal.
-- First Value, if they are not equal.
-\- Syntax: NULLIF(value1, value2)
-\- Example: NULLIF(Shipping_Address, 'unknown')
-\- Example: NULLIF(Shipping_Address, Billing_Address)
-
-**Example-1**
-
-![nullif-invalid-price](images/nullif-invalid-price.png)
-
-In this example we are checking if there is any invalid price. so we are replacing invalid price with null value.
-
-**Example-2**
-
-![nullif-inconsistent-data](images/nullif-inconsistent-data.png)
-
-We can use NULLIF to check for inconsistent data.
-
-**NULLIF Use Case: Division By Zero**
-
-\- preventing the error of dividing by zero
-
-**Example-3**
-
-```sql
--- Find the sale price for each order by dividing the sales by the equity
-SELECT
-    o.OrderId ,
-    o.Sales ,
-    o.Quantity ,
-    o.Sales / NULLIF(o.Quantity, 0) AS Price
-FROM Sales.Orders o ;
-```
-
-| OrderId | Sales | Quantity | Price |
-| ------- | ----- | -------- | ----- |
-| 1       | 10    | 1        | 10    |
-| 2       | 15    | 1        | 15    |
-| 3       | 20    | 2        | 10    |
-| 4       | 60    | 2        | 30    |
-| 5       | 25    | 1        | 25    |
-| 6       | 50    | 2        | 25    |
-| 7       | 30    | 2        | 15    |
-| 8       | 90    | 3        | 30    |
-| 9       | 20    | 2        | 10    |
-| 10      | 60    | 0        | NULL  |
-
-###### **IS NULL & IS NOT NULL**
-
-**IS NULL**
-
-\- Return TRUE if the value is NULL otherwise return FALSE
-\- Syntax: Value IS NULL
-\- Example: Shipping_Address IS NULL
-
-**IS NOT NULL**
-
-\- Return TRUE if the value IS NOT NULL, otherwise it return FALSE.
-\- Syntax: Value IS NOT NULL
-\- Example: Shipping_Address IS NOT NULL
-
-**IS NULL Use Case**
-
-**#1 Filtering Data**
-
-\- Searching for missing information or searching for null.
-
-**Example-1**
-
-```sql
--- Identify the customers who have no score.
-SELECT
-    *
-FROM Sales.Customers c
-WHERE c.Score IS NULL;
-```
-
-| CustomerID | FirstName | LastName | Country | Score |
-| ---------- | --------- | -------- | ------- | ----- |
-| 5          | Anna      | Adams    | USA     | NULL  |
-
-**Example-2**
-
-```sql
--- List all customers who have scores
-SELECT
-    *
-FROM Sales.Customers c
-WHERE c.Score IS NOT NULL;
-```
-
-| CustomerID | FirstName | LastName | Country | Score |
-| ---------- | --------- | -------- | ------- | ----- |
-| 1          | Jossef    | Goldberg | Germany | 350   |
-| 2          | Kevin     | Brown    | USA     | 900   |
-| 3          | Mary      | NULL     | USA     | 750   |
-| 4          | Mark      | Schwarz  | Germany | 500   |
-
-**#2 Anti Joins**
-
-\- Finding the unmatched rows between two tables.
-
-```sql
--- List all details for customers who have not placed any orders
-SELECT
-    c.CustomerID ,
-    c.FirstName ,
-    o.OrderID ,
-    o.OrderDate
-FROM Sales.Customers c
-LEFT JOIN Sales.Orders o
-    ON c.CustomerID = o.CustomerID
-WHERE o.CustomerID IS NULL
-```
-
-| CustomerID | FirstName | OrderID | OrderDate |
-| ---------- | --------- | ------- | --------- |
-| 5          | Anna      | NULL    | NULL      |
-
-###### **NULL vs Empty vs Space**
-
-**NULL**
-
-\- Null means nothing, unknown!
-
-**Empty**
-
-\- String value which has zero characters
-
-**Space**
-
-\- Space value has one or more space characters.
-
-![null-vs-empty-vs-space](images/null-vs-empty-vs-space.png)
-
-###### **Handling NULLS**
-
-**Data Policies**
-
-\- Set of rules that defines how data should be handled.
-
-**#1 Data Policy**
-
-- only use NULLs and empty strings, but avoid using blank spaces.
-
-**#2 Data Policy**
-
-- only use NULLs and avoid using empty strings and blank spaces.
-- Use Case: Replacing empty string and blanks with NULL during data preparation before inserting into database to optimize storage and performance.
-
-**#3 Data Policy**
-
-- Use the default value 'unknown' and avoid using NULLs, empty strings and blank spaces.
-- Use Case: Replacing empty string, NULL and blanks with default value during data preparation before using it in reporting to improve readiblity and reduce confusion.
-
-**Example**
-
-![data-policy-example](images/data-policy-example.png)
-
-###### **Use Case: Handling NULLS**
-
-**Data Aggregation**
-
-\- we can use ISNULL or COALESCE to handle the null before doing data aggregations.
-
-![aggregate-functions-ignore-null](images/aggregate-functions-ignore-null.png)
-
-If we try to calculate avg or min or max then we can get misleading result because we want to treat null as 0 but aggregate function ignore null except COUNT. so we can replace null with 0 using ISNULL or COALESCE to get accurate results.
-
-![aggregate-functions-null-as-zero](images/aggregate-functions-null-as-zero.png)
-
-```sql
--- Find the average scores of the customers.
-SELECT
-    c.CustomerID ,
-    c.Score ,
-    COALESCE(c.Score, 0) AS score2,
-    AVG(c.Score) OVER() AS average_score2,
-    AVG(COALESCE(Score, 0)) OVER () AS average_score
-FROM Sales.Customers c ;
-```
-
-| CustomerID | Score | score2 | average_score2 | average_score |
-| ---------- | ----- | ------ | -------------- | ------------- |
-| 1          | 350   | 350    | 625            | 500           |
-| 2          | 900   | 900    | 625            | 500           |
-| 3          | 750   | 750    | 625            | 500           |
-| 4          | 500   | 500    | 625            | 500           |
-| 5          | NULL  | 0      | 625            | 500           |
-
-> The primary difference between AVG() and AVG() OVER() lies in how they process rows and shape the final query output:
->
-> - AVG() (Aggregate Function): Combines multiple rows into a single summary row per group (when used with GROUP BY), reducing the total number of rows returned in the result set.
-> - AVG() OVER() (Window Function): Calculates the average across a set of related rows while retaining all original row-level details
-
-**Mathematical Operations**
-
-\- handle the null before doing mathematical operations.
-\- we get NULL + 5 = NULL and NULL + 'B' = NULL. Adding anything to null we get result as a null.
-
-```sql
--- Display the full name of the customer in a single field by merging their firstname and lastnames,
--- and add 10 bonus points to each customer's score.
-SELECT
-    c.CustomerID ,
-    c.FirstName ,
-    c.LastName ,
-    c.FirstName  +  COALESCE(c.LastName, '') AS fullname,
-    c.Score ,
-    COALESCE(c.Score, 0) + 10 AS score_with_bonus_points
-FROM Sales.Customers c
-```
-
-| CustomerID | FirstName | LastName | fullname       | Score | score_with_bonus_points |
-| ---------- | --------- | -------- | -------------- | ----- | ----------------------- |
-| 1          | Jossef    | Goldberg | JossefGoldberg | 350   | 360                     |
-| 2          | Kevin     | Brown    | KevinBrown     | 900   | 910                     |
-| 3          | Mary      | NULL     | Mary           | 750   | 760                     |
-| 4          | Mark      | Schwarz  | MarkSchwarz    | 500   | 510                     |
-| 5          | Anna      | Adams    | AnnaAdams      | NULL  | 10                      |
-
-**JOINS**
-
-\- Handle the NULL before JOINING TABLES
-
-**Example**
-
-![join-null-loses-records](images/join-null-loses-records.png)
-
-We are going to lose record in the output if have null inside our key. So, it is important to handle NULL inside the key before doing joins. So, we are going to handle the null by replacing it with empty string before doing joins.
-
-**Solution**
-
-![join-null-handled-with-isnull](images/join-null-handled-with-isnull.png)
-
-So, to get complete result without losing any records when joining the table we can use ISNULL function to check key.
-
-**Sorting Data**
-
-\- Handle the NULL before sorting the data.
-
-**Example**
-
-```sql
--- Sort the customers from lowest to highest scores with NULL appearing at last.
-SELECT
-    c.CustomerID ,
-    c.Score
-FROM Sales.Customers c
-ORDER BY CASE WHEN c.Score IS NULL THEN 1 ELSE 0 END, c.score
-```
-
-| CustomerID | Score |
-| ---------- | ----- |
-| 1          | 350   |
-| 4          | 500   |
-| 3          | 750   |
-| 2          | 900   |
-| 5          | NULL  |
-
-###### **Null Functions: Summary**
-
-![null-functions-summary](images/null-functions-summary.png)

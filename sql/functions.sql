@@ -1,4 +1,4 @@
--- Sql functions
+-- SQL Functions
 
 -- String functions
 

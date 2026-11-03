@@ -14,7 +14,12 @@ Each note has **Previous / Next** links at the top, so you can read straight thr
 6. [Combining Data](combining-data/combining-data.md)
 7. [Joins](joins/joins.md)
 8. [Set Operators](set-operators/set-operators.md)
-9. [SQL Functions](functions/Sql%20functions.md)
+9. [SQL Functions](functions/functions.md)
+10. [Single-Row Functions](functions/single-row-functions.md)
+11. [String Functions](functions/string-functions.md)
+12. [Number Functions](functions/number-functions.md)
+13. [Date & Time Functions](functions/date-time-functions.md)
+14. [Null Functions](functions/null-functions.md)
 
 ### Foundations
 
@@ -41,9 +46,14 @@ Each note has **Previous / Next** links at the top, so you can read straight thr
 
 ### Functions
 
-| Topic                                         | What's inside                                                                                               |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [SQL Functions](functions/Sql%20functions.md) | What functions are, nested functions, single-row functions: string, number, date & time, and NULL functions |
+| Topic                                                     | What's inside                                                                           |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [SQL Functions](functions/functions.md)                   | What functions are, nested functions, and the types of SQL functions                    |
+| [Single-Row Functions](functions/single-row-functions.md) | What single-row functions are and the categories: string, number, date & time, and null |
+| [String Functions](functions/string-functions.md)         | CONCAT, LOWER & UPPER, TRIM, REPLACE, LEN, LEFT, RIGHT, SUBSTRING                       |
+| [Number Functions](functions/number-functions.md)         | ROUND, ABS                                                                              |
+| [Date & Time Functions](functions/date-time-functions.md) | GETDATE, part extraction, format & casting, DATEADD, DATEDIFF, ISDATE                   |
+| [Null Functions](functions/null-functions.md)             | NULL basics, ISNULL, COALESCE, NULLIF, IS NULL, NULL vs empty vs space, handling NULLs  |
 
 ### Practice
 

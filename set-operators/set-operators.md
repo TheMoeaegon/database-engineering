@@ -1,6 +1,6 @@
 ## Set Operators
 
-← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [SQL Functions](../functions/Sql%20functions.md)
+← Previous: [Joins](../joins/joins.md) | [Index](../README.md) | Next → [SQL Functions](../functions/functions.md)
 
 ### Syntax of Set Operator
 
